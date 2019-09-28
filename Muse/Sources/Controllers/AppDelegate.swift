@@ -32,7 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func toggleWindowMenuItemClicked(_ sender: Any) {
         // Show window
-        windowToggledHandler()
+        NSApplication.shared.activate(ignoringOtherApps: true)
+        //windowToggledHandler()
     }
     
     @IBAction func quitMenuItemClicked(_ sender: Any) {
