@@ -783,8 +783,10 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         if case .began = recognizer.state {
             songArtworkTitleButton?.title =
                 recognizer.translation(in: songArtworkTitleButton).x > 0 ?
-                song.name.truncate(at: songTitleMaximumLength)           :
-                song.artist.truncate(at: songTitleMaximumLength)
+                    (touchBar?.itemIdentifiers.count ?? 5 < 5) ?
+                        song.name: song.name.truncate(at: songTitleMaximumLength) :
+                (touchBar?.itemIdentifiers.count ?? 5<5) ?
+                song.artist: song.artist.truncate(at: songTitleMaximumLength)
         }
     }
     
@@ -1263,9 +1265,19 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     }
     
     func updateTouchBarUI() {
-        songArtworkTitleButton?.title = song.name.truncate(at: songTitleMaximumLength)
-        songArtworkTitleButton?.sizeToFit()
+        if(touchBar?.itemIdentifiers.count ?? 5 < 5){
         
+            songArtworkTitleButton?.title = song.name
+        
+            songArtworkTitleButton?.sizeToFit()
+        
+        }else{
+            
+            songArtworkTitleButton?.title = song.name.truncate(at: songTitleMaximumLength)
+            
+            songArtworkTitleButton?.sizeToFit()
+            
+        }
         controlsSegmentedView?.setImage(helper.isPlaying ? .pause : .play,
                                        forSegment: 1)
         
@@ -1292,8 +1304,14 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // to optimize performace and memory usage
         image.getColors(scaleDownSize: NSMakeSize(25, 25)) { colors in
             // Set colors on TouchBar button
-            self.songArtworkTitleButton?.bezelColor = colors.primary.blended(withFraction: 0.5, of: .darkGray)
-
+            let temp = colors.primary.blended(withFraction: 0.5, of: .darkGray)
+            self.songArtworkTitleButton?.bezelColor = temp
+            self.songProgressSlider?.layer?.backgroundColor=temp?.cgColor
+            self.likeButton?.bezelColor = temp
+           (self.soundPopoverButton?.collapsedRepresentation as? NSButton)?.bezelColor=temp
+//            self.controlsSegmentedView?.layer?.backgroundColor = temp?.cgColor
+//            self.controlsSegmentedView?.layer?.cornerRadius = 8
+            
             // Set colors on main view
             self.onViewController { controller in
                 controller.colorViews(with: colors)
