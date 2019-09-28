@@ -31,7 +31,8 @@ class NSMediaSliderTouchBarItem: NSSliderTouchBarItem {
         
         // TODO: find a way to remove this
         slider.wantsLayer             = true
-        slider.layer?.backgroundColor = NSColor.black.cgColor
+        //slider.layer?.backgroundColor = NSColor.green.cgColor
+        slider.layer?.cornerRadius=8
         
         self.slider = slider
     }
