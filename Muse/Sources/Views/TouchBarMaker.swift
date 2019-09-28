@@ -228,7 +228,7 @@ extension WindowController: NSTouchBarDelegate {
                                                   action: nil,
                                                   hasRoundedLeadingImage: true)
                 button.imagePosition = .imageLeading
-                button.addTouchBarButtonWidthConstraint()
+//                button.addTouchBarButtonWidthConstraint()
                 customItem.view = button
             case .likeButton:
                 let button = NSButton(title: "",
