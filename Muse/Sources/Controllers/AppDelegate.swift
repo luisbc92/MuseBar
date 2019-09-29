@@ -49,6 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if #available(OSX 10.12.2, *) { NSApp.toggleTouchBarCustomizationPalette(self) }
     }
     
+    @IBOutlet weak var updateTouchbar: NSMenuItem!
     // MARK: Preferences
     
     let preferencesWindowController: NSWindowController = MASPreferencesWindowController(viewControllers: [GeneralPreferencesViewController(), AccountsPreferencesViewController()])
