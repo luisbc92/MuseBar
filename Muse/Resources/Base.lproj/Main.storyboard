@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -65,11 +65,13 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Muse" customModuleProvider="target">
                     <connections>
                         <outlet property="menuBarMenu" destination="3ym-64-pdK" id="XDT-Sh-nTN"/>
+                        <outlet property="updateTouchbar" destination="WEZ-Uj-ZDL" id="llg-xb-R7q"/>
                     </connections>
                 </customObject>
                 <menu id="3ym-64-pdK">
                     <items>
                         <menuItem title="Toggle window" keyEquivalent="s" id="Bui-oX-Ymd">
+                            <attributedString key="attributedTitle"/>
                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             <connections>
                                 <action selector="toggleWindowMenuItemClicked:" target="Voe-Tx-rLC" id="nfU-G6-SyF"/>
@@ -82,6 +84,10 @@
                                 <action selector="customizeTouchBar:" target="Voe-Tx-rLC" id="Xqq-K0-BJf"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Update Touch Bar" id="WEZ-Uj-ZDL">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="yjf-Jo-Olv"/>
                         <menuItem title="Preferences" keyEquivalent="," id="dCp-UH-qtu" userLabel="Preferences">
                             <connections>
                                 <action selector="preferencesMenuItemClicked:" target="Voe-Tx-rLC" id="SZz-8z-7BL"/>
@@ -104,7 +110,7 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="tvw-ff-7tM" customClass="SUUpdater"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="74" y="1"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -114,7 +120,7 @@
                         <windowStyleMask key="styleMask" titled="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="200" height="200"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="TV5-eB-iAu"/>
                         </connections>
@@ -125,7 +131,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="74" y="246"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
