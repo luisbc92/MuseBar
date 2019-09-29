@@ -683,6 +683,9 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     func prepareWindow() {
         guard let window = self.window else { return }
         
+        //Connects the menubar items action
+        delegate?.updateTouchbar.action = #selector(updateTouchBar)
+        
         window.titleVisibility = NSWindow.TitleVisibility.hidden;
         window.titlebarAppearsTransparent = true
         window.styleMask.update(with: NSWindow.StyleMask.fullSizeContentView)
@@ -785,7 +788,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
                 recognizer.translation(in: songArtworkTitleButton).x > 0 ?
                     (touchBar?.itemIdentifiers.count ?? 5 < 5) ?
                         song.name: song.name.truncate(at: songTitleMaximumLength) :
-                (touchBar?.itemIdentifiers.count ?? 5<5) ?
+                (touchBar?.itemIdentifiers.count ?? 5 < 5) ?
                 song.artist: song.artist.truncate(at: songTitleMaximumLength)
         }
     }
@@ -1264,15 +1267,24 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         }
     }
     
+    @objc func updateTouchBar(_ sender: NSMenuItem){
+        updateTouchBarUI()
+    }
+    
     func updateTouchBarUI() {
-        if(touchBar?.itemIdentifiers.count ?? 5 < 5){
-        
+        if((touchBar?.itemIdentifiers.count ?? 5 < 5)){
+            if(songProgressSlider?.constraints.count==1){
+            songProgressSlider?.addWidthConstraint(size: 210)
+            }
             songArtworkTitleButton?.title = song.name
         
             songArtworkTitleButton?.sizeToFit()
         
         }else{
-            
+            if(songProgressSlider?.constraints.count==2){
+            songProgressSlider?.removeConstraint((songProgressSlider?.constraints[1])!)
+                
+            }
             songArtworkTitleButton?.title = song.name.truncate(at: songTitleMaximumLength)
             
             songArtworkTitleButton?.sizeToFit()
