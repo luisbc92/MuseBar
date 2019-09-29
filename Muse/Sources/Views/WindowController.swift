@@ -783,12 +783,19 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     }
     
     @objc func songArtworkTitleButtonPanGestureHandler(_ recognizer: NSPanGestureRecognizer) {
+        var count = 0;
+        for i in touchBar!.itemIdentifiers{
+            if(i == .flexibleSpace){
+                continue
+            }
+            count += 1
+        }
         if case .began = recognizer.state {
             songArtworkTitleButton?.title =
                 recognizer.translation(in: songArtworkTitleButton).x > 0 ?
-                    (touchBar?.itemIdentifiers.count ?? 5 < 5) ?
+                    (count < 5) ?
                         song.name: song.name.truncate(at: songTitleMaximumLength) :
-                (touchBar?.itemIdentifiers.count ?? 5 < 5) ?
+                (count<5) ?
                 song.artist: song.artist.truncate(at: songTitleMaximumLength)
         }
     }
@@ -1272,7 +1279,15 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     }
     
     func updateTouchBarUI() {
-        if((touchBar?.itemIdentifiers.count ?? 5 < 5)){
+        var count = 0;
+        for i in touchBar!.itemIdentifiers {
+            if(i == .flexibleSpace){
+                continue
+            }
+            count += 1
+        }
+        
+        if(count < 5){
             if(songProgressSlider?.constraints.count==1){
             songProgressSlider?.addWidthConstraint(size: 210)
             }
