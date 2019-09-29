@@ -22,6 +22,7 @@ import Cocoa
     static let controlsSegmentedView       = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.controlsSegmentedView")
     static let likeButton                 = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.likeButton")
     static let soundPopoverButton         = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.soundPopoverButton")
+    static let fixedSpace = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.fixedSpace")
     
     // Popover TouchBar identifiers
     static let soundSlider                = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.soundSlider")
@@ -44,7 +45,9 @@ extension WindowController: NSTouchBarDelegate {
                                             .songProgressSlider,
                                             .controlsSegmentedView,
                                             .likeButton,
-                                            .soundPopoverButton]
+                                            .soundPopoverButton,
+                                            .fixedSpace,
+                                            .flexibleSpace]
         
         // Allow customization of NSTouchBar items
         touchBar.customizationAllowedItemIdentifiers = touchBar.defaultItemIdentifiers
@@ -122,6 +125,16 @@ extension WindowController: NSTouchBarDelegate {
                 soundPopoverButton?.pressAndHoldTouchBar = popoverBar!
                 updateSoundPopoverButton(for: helper.volume)
             }
+        case .fixedSpace:
+            let temp = NSCustomTouchBarItem(identifier: identifier)
+            let k = NSRect(x: 0, y: 0, width: 5, height: 5)
+            let y = NSBox(frame: k)
+            y.title = "                        "
+            temp.view=y
+            temp.customizationLabel = "Small Fixed Space"
+            temp.view.acceptsTouchEvents=false
+            
+            return temp
         default:
             return nil
         }
@@ -270,6 +283,9 @@ extension NSView {
                                       size: size))
     }
     
+    func removeWidthConstraint(constraint: NSLayoutConstraint){
+        removeConstraint(constraint)
+    }
 }
  
  extension NSControl.ImagePosition {
