@@ -1187,21 +1187,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         } else {
             controlStripButton?.image = nil
         }
-        
-        
-        // Fetch image colors
-        // We also set an aggressive scaling size
-        // to optimize performace and memory usage
-        image.getColors(scaleDownSize: NSMakeSize(25, 25)) { colors in
-            // Set colors on TouchBar button
-            let temp = colors.primary.blended(withFraction: 0.5, of: .darkGray)
-            self.songArtworkTitleButton?.bezelColor = temp
-            self.songProgressSlider?.layer?.backgroundColor=temp?.cgColor
-            self.likeButton?.bezelColor = temp
-           (self.soundPopoverButton?.collapsedRepresentation as? NSButton)?.bezelColor=temp
-//            self.controlsSegmentedView?.layer?.backgroundColor = temp?.cgColor
-//            self.controlsSegmentedView?.layer?.cornerRadius = 8
-        }
     }
     
 }
