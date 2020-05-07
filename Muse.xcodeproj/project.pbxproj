@@ -65,8 +65,6 @@
 		0CFF466C1DE3826300A3BE8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF466B1DE3826300A3BE8E /* ViewController.swift */; };
 		0CFF466E1DE3826300A3BE8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CFF466D1DE3826300A3BE8E /* Assets.xcassets */; };
 		0CFF46711DE3826300A3BE8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CFF466F1DE3826300A3BE8E /* Main.storyboard */; };
-		0CFF467C1DE3826300A3BE8E /* MuseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF467B1DE3826300A3BE8E /* MuseTests.swift */; };
-		0CFF46871DE3826300A3BE8E /* MuseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF46861DE3826300A3BE8E /* MuseUITests.swift */; };
 		0CFF46951DE382BA00A3BE8E /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF46941DE382BA00A3BE8E /* WindowController.swift */; };
 		0CFF46971DE383A300A3BE8E /* SpotifyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF46961DE383A300A3BE8E /* SpotifyHelper.swift */; };
 		FD9F763CA855EFBC8846FCDC /* Pods_Muse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BDC604CADA41563E00527AC /* Pods_Muse.framework */; };
@@ -121,20 +119,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = A8580F741BCF5C5B00DA927B;
 			remoteInfo = "SwiftyJSON tvOS Tests";
-		};
-		0CFF46781DE3826300A3BE8E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0CFF465E1DE3826300A3BE8E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0CFF46651DE3826300A3BE8E;
-			remoteInfo = Muse;
-		};
-		0CFF46831DE3826300A3BE8E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0CFF465E1DE3826300A3BE8E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0CFF46651DE3826300A3BE8E;
-			remoteInfo = Muse;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -214,12 +198,6 @@
 		0CFF466D1DE3826300A3BE8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CFF46701DE3826300A3BE8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0CFF46721DE3826300A3BE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0CFF46771DE3826300A3BE8E /* MuseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CFF467B1DE3826300A3BE8E /* MuseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseTests.swift; sourceTree = "<group>"; };
-		0CFF467D1DE3826300A3BE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0CFF46821DE3826300A3BE8E /* MuseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CFF46861DE3826300A3BE8E /* MuseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseUITests.swift; sourceTree = "<group>"; };
-		0CFF46881DE3826300A3BE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CFF46941DE382BA00A3BE8E /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		0CFF46961DE383A300A3BE8E /* SpotifyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyHelper.swift; sourceTree = "<group>"; };
 		1E0C322245B2C90A7AFF4109 /* Pods-Muse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muse/Pods-Muse.release.xcconfig"; sourceTree = "<group>"; };
@@ -237,20 +215,6 @@
 				0CFA0FDD1DF37059007DA6AE /* MediaPlayer.framework in Frameworks */,
 				0C9A60D91DE79B6D0051CDC6 /* Carbon.framework in Frameworks */,
 				FD9F763CA855EFBC8846FCDC /* Pods_Muse.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CFF46741DE3826300A3BE8E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CFF467F1DE3826300A3BE8E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,8 +388,6 @@
 			isa = PBXGroup;
 			children = (
 				0CFF46681DE3826300A3BE8E /* Muse */,
-				0CFF467A1DE3826300A3BE8E /* MuseTests */,
-				0CFF46851DE3826300A3BE8E /* MuseUITests */,
 				0CFF46671DE3826300A3BE8E /* Products */,
 				7E9AA20CAC9772D1BED5DCE5 /* Frameworks */,
 				13E90AB099C71FADF4FD0063 /* Pods */,
@@ -436,8 +398,6 @@
 			isa = PBXGroup;
 			children = (
 				0CFF46661DE3826300A3BE8E /* Muse.app */,
-				0CFF46771DE3826300A3BE8E /* MuseTests.xctest */,
-				0CFF46821DE3826300A3BE8E /* MuseUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -451,24 +411,6 @@
 				0CFA8E2C1F7AECA200D1AE83 /* Resources */,
 			);
 			path = Muse;
-			sourceTree = "<group>";
-		};
-		0CFF467A1DE3826300A3BE8E /* MuseTests */ = {
-			isa = PBXGroup;
-			children = (
-				0CFF467B1DE3826300A3BE8E /* MuseTests.swift */,
-				0CFF467D1DE3826300A3BE8E /* Info.plist */,
-			);
-			path = MuseTests;
-			sourceTree = "<group>";
-		};
-		0CFF46851DE3826300A3BE8E /* MuseUITests */ = {
-			isa = PBXGroup;
-			children = (
-				0CFF46861DE3826300A3BE8E /* MuseUITests.swift */,
-				0CFF46881DE3826300A3BE8E /* Info.plist */,
-			);
-			path = MuseUITests;
 			sourceTree = "<group>";
 		};
 		13E90AB099C71FADF4FD0063 /* Pods */ = {
@@ -522,42 +464,6 @@
 			productReference = 0CFF46661DE3826300A3BE8E /* Muse.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0CFF46761DE3826300A3BE8E /* MuseTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0CFF468E1DE3826300A3BE8E /* Build configuration list for PBXNativeTarget "MuseTests" */;
-			buildPhases = (
-				0CFF46731DE3826300A3BE8E /* Sources */,
-				0CFF46741DE3826300A3BE8E /* Frameworks */,
-				0CFF46751DE3826300A3BE8E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0CFF46791DE3826300A3BE8E /* PBXTargetDependency */,
-			);
-			name = MuseTests;
-			productName = MuseTests;
-			productReference = 0CFF46771DE3826300A3BE8E /* MuseTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		0CFF46811DE3826300A3BE8E /* MuseUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0CFF46911DE3826300A3BE8E /* Build configuration list for PBXNativeTarget "MuseUITests" */;
-			buildPhases = (
-				0CFF467E1DE3826300A3BE8E /* Sources */,
-				0CFF467F1DE3826300A3BE8E /* Frameworks */,
-				0CFF46801DE3826300A3BE8E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0CFF46841DE3826300A3BE8E /* PBXTargetDependency */,
-			);
-			name = MuseUITests;
-			productName = MuseUITests;
-			productReference = 0CFF46821DE3826300A3BE8E /* MuseUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -570,7 +476,7 @@
 				TargetAttributes = {
 					0CFF46651DE3826300A3BE8E = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 95ZS5S2W7X;
+						DevelopmentTeam = T8HKXLJ6T3;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -578,18 +484,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					0CFF46761DE3826300A3BE8E = {
-						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0810;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 0CFF46651DE3826300A3BE8E;
-					};
-					0CFF46811DE3826300A3BE8E = {
-						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0810;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 0CFF46651DE3826300A3BE8E;
 					};
 				};
 			};
@@ -614,8 +508,6 @@
 			projectRoot = "";
 			targets = (
 				0CFF46651DE3826300A3BE8E /* Muse */,
-				0CFF46761DE3826300A3BE8E /* MuseTests */,
-				0CFF46811DE3826300A3BE8E /* MuseUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -682,20 +574,6 @@
 				0CFF466E1DE3826300A3BE8E /* Assets.xcassets in Resources */,
 				0C4AC6AB210F51CA0064D7BD /* GeneralPreferencesView.xib in Resources */,
 				0CFF46711DE3826300A3BE8E /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CFF46751DE3826300A3BE8E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CFF46801DE3826300A3BE8E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,36 +683,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0CFF46731DE3826300A3BE8E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CFF467C1DE3826300A3BE8E /* MuseTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CFF467E1DE3826300A3BE8E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CFF46871DE3826300A3BE8E /* MuseUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0CFF46791DE3826300A3BE8E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0CFF46651DE3826300A3BE8E /* Muse */;
-			targetProxy = 0CFF46781DE3826300A3BE8E /* PBXContainerItemProxy */;
-		};
-		0CFF46841DE3826300A3BE8E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0CFF46651DE3826300A3BE8E /* Muse */;
-			targetProxy = 0CFF46831DE3826300A3BE8E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0CFF466F1DE3826300A3BE8E /* Main.storyboard */ = {
@@ -950,7 +799,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 95ZS5S2W7X;
+				DEVELOPMENT_TEAM = T8HKXLJ6T3;
 				INFOPLIST_FILE = "$(SRCROOT)/Muse/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MARKETING_VERSION = 4.1.2;
@@ -974,7 +823,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 95ZS5S2W7X;
+				DEVELOPMENT_TEAM = T8HKXLJ6T3;
 				INFOPLIST_FILE = "$(SRCROOT)/Muse/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MARKETING_VERSION = 4.1.2;
@@ -984,64 +833,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Muse/Resources/Muse-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited) $(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
-			};
-			name = Release;
-		};
-		0CFF468F1DE3826300A3BE8E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MuseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.edge.MuseTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Muse.app/Contents/MacOS/Muse";
-			};
-			name = Debug;
-		};
-		0CFF46901DE3826300A3BE8E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MuseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.edge.MuseTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Muse.app/Contents/MacOS/Muse";
-			};
-			name = Release;
-		};
-		0CFF46921DE3826300A3BE8E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MuseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.edge.MuseUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = Muse;
-			};
-			name = Debug;
-		};
-		0CFF46931DE3826300A3BE8E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MuseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.edge.MuseUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = Muse;
 			};
 			name = Release;
 		};
@@ -1062,24 +853,6 @@
 			buildConfigurations = (
 				0CFF468C1DE3826300A3BE8E /* Debug */,
 				0CFF468D1DE3826300A3BE8E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0CFF468E1DE3826300A3BE8E /* Build configuration list for PBXNativeTarget "MuseTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0CFF468F1DE3826300A3BE8E /* Debug */,
-				0CFF46901DE3826300A3BE8E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0CFF46911DE3826300A3BE8E /* Build configuration list for PBXNativeTarget "MuseUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0CFF46921DE3826300A3BE8E /* Debug */,
-				0CFF46931DE3826300A3BE8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
