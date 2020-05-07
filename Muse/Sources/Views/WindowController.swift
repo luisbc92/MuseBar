@@ -222,92 +222,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Same action as touch ended
         didTouchesEnd()
     }
-    
-    // MARK: Key handlers
-    
-    func initKeyDownHandler() {
-        eventMonitor = NSEvent.addLocalMonitorForEvents(matching: NSEvent.EventTypeMask.keyDown,
-            handler: { event in
-                if self.handleKeyDown(with: event) { return nil }
-                
-                return event
-        })
-    }
-    
-    func deinitKeyDownHandler() {
-        if let monitor = eventMonitor {
-            NSEvent.removeMonitor(monitor)
-        }
-    }
-    
-    @discardableResult
-    func handleKeyDown(with event: NSEvent) -> Bool {
-        // Ensure that no text field is first responder
-        // We don't want to intercept keystrokes while text editing
-        if let _ = window?.firstResponder as? NSTextView { return false }
-        
-        switch KeyCombination(event.modifierFlags, event.keyCode) {
-        case KeyCombination(.command, kVK_ANSI_S):
-            setPlayerHelper(to: .spotify)
-            return true
-        case KeyCombination(.command, kVK_ANSI_I):
-            setPlayerHelper(to: .itunes)
-            return true
-        case KeyCombination(.command, kVK_ANSI_V):
-            setPlayerHelper(to: .vox)
-            return true
-        case kVK_LeftArrow, kVK_ANSI_A:
-            helper.previousTrack()
-            return true
-        case kVK_Space, kVK_ANSI_S:
-            helper.togglePlayPause()
-            return true
-        case kVK_RightArrow, kVK_ANSI_D:
-            helper.nextTrack()
-            return true
-        case kVK_ANSI_W:
-            showPlayer()
-            return true
-        case kVK_ANSI_X:
-            helper.toggleShuffling()
-            return true
-        case kVK_ANSI_R:
-            helper.toggleRepeating()
-            return true
-        case kVK_ANSI_L:
-            if var helper = helper as? LikablePlayerHelper { helper.toggleLiked() }
-        default:
-            break
-        }
-        
-        return false
-    }
-    
-    func registerHotkey() {
-        guard let hotkeyCenter = DDHotKeyCenter.shared() else { return }
-        
-        let modifiers: UInt = NSEvent.ModifierFlags.control.rawValue | NSEvent.ModifierFlags.command.rawValue
-        
-        // Register system-wide summon hotkey
-        hotkeyCenter.registerHotKey(withKeyCode: UInt16(kVK_ANSI_S),
-                                    modifierFlags: modifiers,
-                                    target: self,
-                                    action: #selector(hotkeyAction),
-                                    object: nil)
-    }
-    
-    @objc func hotkeyAction() {
-        if let window = self.window {
-            if didPresentAsSystemModal {
-                // Dismiss system modal bar before opening the window
-                // touch bar gets broken otherwise
-                touchBar?.minimizeSystemModal()
-            }
-            
-            window.toggleVisibility()
-        }
-    }
-    
+      
     func showPlayer() {
         let player = NSRunningApplication.runningApplications(
             withBundleIdentifier: type(of: helper).BundleIdentifier
@@ -423,7 +338,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         controlStripButton = NSCustomizableButton(
             title: "11:11",
             target: self,
-            action: #selector(presentModalTouchBar),
+            action: #selector(triggerPlayPause),
             hasRoundedLeadingImage: false
         )
         
@@ -464,7 +379,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     /**
      Recognizes pan (aka touch drag) gestures on the control strip button.
-     We use this to jump to next/previous track.
+     We use this to reveal the designated NSTouchBar.
      */
     var controlStripButtonPanGestureRecognizer: NSPanGestureRecognizer {
         let recognizer = NSPanGestureRecognizer()
@@ -482,7 +397,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         
         switch recognizer.state {
         case .began:
-            helper.togglePlayPause()
+            presentModalTouchBar()
         default:
             break
         }
@@ -506,6 +421,15 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     /**
      Reveals the designated NSTouchBar when control strip button @objc is pressed
+    */
+    @objc func triggerPlayPause() {
+        updatePopoverButtonForControlStrip()
+        
+        helper.togglePlayPause()
+    }
+    
+    /**
+     Reveals the designated NSTouchBar when control strip button @objc is pressed
      */
     @objc func presentModalTouchBar() {
         updatePopoverButtonForControlStrip()
@@ -523,9 +447,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Initialize AEManager for URL handling
         initEventManager()
         
-        // Initialize event monitor for keyDown
-        initKeyDownHandler()
-        
         // Initialize notification watcher
         initNotificationWatchers()
         
@@ -535,9 +456,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Register callbacks for PlayerHelper
         registerCallbacks()
         
-        // Register our DDHotKey
-        registerHotkey()
-        
         // Prepare system-wide controls
         prepareRemoteCommandCenter()
         
@@ -545,7 +463,8 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         injectControlStripButton()
         
         // Show window
-        window?.setVisibility(true)
+        window?.makeKeyAndOrderFront(self)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     func windowDidBecomeKey(_ notification: Notification) {
@@ -616,20 +535,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         window.delegate = self
         
         window.makeFirstResponder(self)
-    }
-    
-    func startAutoClose() {
-        // Ensures any existing auto-close timer is cancelled
-        autoCloseTimer.invalidate()
-        
-        // Timer for auto-close
-        autoCloseTimer = Timer.scheduledTimer(withTimeInterval: autoCloseTimeout,
-                                              repeats: false) { timer in
-            timer.invalidate()
-            
-            // Reset count and close the window
-            self.window?.isVisibleAsHUD = false
-        }
     }
     
     func prepareSong() {
@@ -1082,9 +987,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     func windowWillClose(_ notification: Notification) {
         // Remove the observer when window is closed
         deinitPlayerNotificationWatchers()
-        
-        // Remove the keyDown event monitor
-        deinitKeyDownHandler()
         
         // Invalidate progress timer
         deinitSongTrackingTimer()

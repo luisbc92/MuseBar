@@ -15,60 +15,6 @@ enum NSWindowShiftDirection {
 
 extension NSWindow {
     
-    // MARK: Extended functions
-    
-    func toggleVisibility() {
-        // Hide window if focused, show if not
-        setVisibility(!self.isKeyWindow)
-    }
-    
-    func setVisibility(_ visible: Bool, animateClose: Bool = false) {
-        // Toggles window visibility
-        // Bringing the older app on top if necessary
-        if visible {
-            self.makeKeyAndOrderFront(self)
-            NSApp.activate(ignoringOtherApps: true)
-        } else {
-            if animateClose {
-                self.fadeClose(duration: 0.4) { NSApp.hide(self) }
-            } else {
-                NSApp.hide(self)
-            }
-        }
-    }
-    
-    var isVisibleAsHUD: Bool {
-        set {
-            if newValue {
-                self.level = NSWindow.Level.screenSaver
-                self.hidesOnDeactivate = false
-                self.orderFrontRegardless()
-            } else {
-                self.fadeClose(duration: 0.4) {
-                    self.level = NSWindow.Level.normal
-                    self.hidesOnDeactivate = true
-                }
-            }
-        }
-        
-        get {
-            return   self.level == NSWindow.Level.screenSaver &&
-                    !self.hidesOnDeactivate
-        }
-    }
-    
-    func fadeClose(duration: TimeInterval,
-                   completionHandler: @escaping () -> ()) {
-        NSAnimationContext.runAnimationGroup( { context in
-            context.duration = duration
-            
-            self.animator().alphaValue = 0.0
-        }, completionHandler: {
-            self.animator().alphaValue = 1.0
-            completionHandler()
-        } )
-    }
-    
     /**
      Shifts the origin of 'self' by a specified delta and direction, resizing self accordingly
      to keep original vertical and horizontal dimensions.

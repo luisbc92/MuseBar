@@ -52,9 +52,9 @@ import SpotifyKit
 // The SpotifyKit object, available to all classes
 var spotifyManager = SpotifyManager(
     with: SpotifyManager.SpotifyDeveloperApplication(
-        clientId: "fff95f1ce70e4dffb534bf9bbdf8da6d",
-        clientSecret: "d5757f19f36644d4b85b9f63abe0ef1f",
-        redirectUri: "muse://callback"
+        clientId: "0701ab33c8f14675b54fbf0118a1f0d2",
+        clientSecret: "63dba9f9963b4516a3507a75d21ae3ee",
+        redirectUri: "musebar://callback"
     )
 )
 

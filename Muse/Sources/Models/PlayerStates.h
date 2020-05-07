@@ -6,6 +6,8 @@
 //  Copyright © 2016 Edge Apps. All rights reserved.
 //
 
+@import Foundation;
+
 #ifndef PlayerStates_h
 #define PlayerStates_h
 
