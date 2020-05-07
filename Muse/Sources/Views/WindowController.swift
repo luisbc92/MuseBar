@@ -71,42 +71,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     weak var soundSlider:                NSSliderTouchBarItem?
     weak var shuffleRepeatSegmentedView: NSSegmentedControl?
     
-    // MARK: Preferences
-    
-    // Show control strip item
-    var shouldShowControlStripItem: Bool {
-        set {
-            if let window = window, !window.isKeyWindow {
-                toggleControlStripButton(force: true, visible: newValue)
-            }
-        }
-        
-        get {            
-            return Preference<Bool>(.controlStripItem).value
-        }
-    }
-    
-    // Show OSD on control strip button action
-    var shouldShowHUDForControlStripAction: Bool {
-        get {
-            return Preference<Bool>(.controlStripHUD).value
-        }
-    }
-    
-    // Constant for enabling title on menuBar
-    var shouldSetTitleOnMenuBar: Bool {
-        set {
-            updateMenuBar()
-        }
-        
-        get {
-            // Determines wheter the title on the menuBar should be set
-            return  Preference<Bool>(.menuBarTitle).value &&
-                    song.isValid &&
-                    helper.isPlaying
-        }
-    }
-    
     // MARK: Vars
     
     let controlStripItem = NSControlStripTouchBarItem(identifier: .controlStripButton)
@@ -450,18 +414,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
             default: break
             }
         }
-        
-        PreferenceNotification<Bool>.observe { [weak self] event in
-            guard let strongSelf = self else { return }
-            
-            switch event.key {
-            case .controlStripItem:
-                strongSelf.shouldShowControlStripItem = event.value
-            case .menuBarTitle:
-                strongSelf.shouldSetTitleOnMenuBar = event.value
-            default: break
-            }
-        }
     }
     
     // MARK: TouchBar injection
@@ -474,9 +426,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         
         DFRSystemModalShowsCloseBoxWhenFrontMost(true)
         
-        if shouldShowControlStripItem {
-            controlStripItem.isPresentInControlStrip = true
-        }
+        controlStripItem.isPresentInControlStrip = true
     }
     
     func prepareControlStripButton() {
@@ -543,11 +493,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         switch recognizer.state {
         case .began:
             helper.togglePlayPause()
-            
-            if shouldShowHUDForControlStripAction {
-                window?.isVisibleAsHUD = true
-                startAutoClose()
-            }
         default:
             break
         }
@@ -560,16 +505,9 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         case .began:
             // Reverse translation check (natural scroll)
             if recognizer.translation(in: controlStripButton).x < 0 {
-                helper.nextTrack()
-            } else {
                 helper.previousTrack()
-            }
-            
-            if shouldShowHUDForControlStripAction {
-                DispatchQueue.main.run(after: 100) {
-                    self.window?.isVisibleAsHUD = true
-                    self.startAutoClose()
-                }
+            } else {
+                helper.nextTrack()
             }
         default:
             break
@@ -673,11 +611,9 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         }
     }
     
-    func toggleControlStripButton(force: Bool = false, visible: Bool = false) {
-        let shouldShow = force ? visible : (visible && shouldShowControlStripItem)
-        
-        controlStripButton?.animator().isHidden  = !shouldShow
-        controlStripItem.isPresentInControlStrip = shouldShow
+    func toggleControlStripButton(visible: Bool = false) {
+        controlStripButton?.animator().isHidden  = !visible
+        controlStripItem.isPresentInControlStrip = visible
     }
     
     func prepareWindow() {
@@ -967,7 +903,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         trackSongProgress()
         
         // If window is not key, restore control strip button visibility
-        // TODO: add a preference for this
         // TODO: improve control on when the button should be refreshed
         if let key = window?.isKeyWindow, !key, !eventSentFromApp {
             toggleControlStripButton(visible: true)
@@ -1226,12 +1161,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     func updateMenuBar() {
         guard let delegate = self.delegate else { return }
-        
-        // Get the wrapped title
-        let title = "♫ " + song.name.truncate(at: kMenuItemMaximumLength)
-        
-        // Set the title on the menuBar if enabled
-        delegate.menuItem.title = shouldSetTitleOnMenuBar ? title : "♫"
+        delegate.menuItem.title = "♫"
     }
     
     var image: NSImage = .defaultBg {

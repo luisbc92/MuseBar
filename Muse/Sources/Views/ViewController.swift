@@ -147,7 +147,7 @@ enum MainViewMode {
     case expandedWithResults
     
     static var defaultMode: MainViewMode {
-        return Preference<Bool>(.actionBar).value ? .partiallyExpanded : .compressed
+        return .partiallyExpanded
     }
     
     var isHoveredMode: Bool {
@@ -213,20 +213,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     // Preferences
     let shouldPeekControls = true  // Hide/show controls on mouse hover
     let shouldShowArtist   = false // Show artist in title popup view
- 
-    var shouldShowActionBar: Bool {
-        set {
-            Preference<Bool>(.actionBar).set(newValue)
-            
-            if !mainViewMode.isHoveredMode {
-                mainViewMode = MainViewMode.defaultMode
-            }
-        }
-        
-        get {
-            return Preference<Bool>(.actionBar).value
-        }
-    }
     
     var shouldShowResultsTableView = false {
         didSet {
@@ -354,8 +340,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
             goToActionTab(at: 1)
         case kVK_ANSI_I:
             showTitleView()
-        case kVK_ANSI_B:
-            shouldShowActionBar = !shouldShowActionBar
         case KeyCombination(.command, kVK_ANSI_F):
             startTrackSearch()
         case KeyCombination(.command, kVK_ANSI_P):
@@ -725,7 +709,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     }
     
     func showActionBarView(show: Bool? = nil) {
-        let show = show ?? shouldShowActionBar
+        let show = show ?? true
         
         view.toggleSubviewVisibilityAndResize(subviewHeight: MainViewComponent.actionBar.height!,
                                               windowHeight: MainViewMode.compressed.height,
@@ -733,10 +717,8 @@ class ViewController: NSViewController, NSTextFieldDelegate {
                                               visible: show)
         
         // Setup action bar buttons and colors
-        if shouldShowActionBar {
-            colorActionBar(background: titleSuperview.layer?.backgroundColor,
-                           highlight: (songProgressBar.cell as! SliderCell).highlightColor)
-        }
+        colorActionBar(background: titleSuperview.layer?.backgroundColor,
+                       highlight: (songProgressBar.cell as! SliderCell).highlightColor)
     }
     
     func showResultsTableView(show: Bool? = nil) {

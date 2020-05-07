@@ -1,17 +1,8 @@
 PODS:
-  - MASPreferences (1.3)
-  - Sparkle (1.21.3)
   - SpotifyKit (0.0.6)
 
 DEPENDENCIES:
-  - MASPreferences
-  - Sparkle
   - SpotifyKit (from `https://github.com/xzzz9097/SpotifyKit.git`)
-
-SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - MASPreferences
-    - Sparkle
 
 EXTERNAL SOURCES:
   SpotifyKit:
@@ -23,10 +14,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/xzzz9097/SpotifyKit.git
 
 SPEC CHECKSUMS:
-  MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
-  Sparkle: 3f75576db8b0265adef36c43249d747f22d0b708
   SpotifyKit: 20abf7e1e170e35683ecbe6d93598e91d4e7b6ab
 
-PODFILE CHECKSUM: be0c2c61163df39d887731d268cf60f860911d15
+PODFILE CHECKSUM: f91777f31777e70a1f1fde0b68de3e0366fff5a1
 
 COCOAPODS: 1.9.1

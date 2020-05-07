@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -41,19 +40,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.terminate(self)
     }
     
-    @IBAction func preferencesMenuItemClicked(_ sender: Any) {
-        preferencesWindowController.showWindow(self)
-    }
-    
     @IBAction func customizeTouchBar(_ sender: NSMenuItem) {
         if #available(OSX 10.12.2, *) { NSApp.toggleTouchBarCustomizationPalette(self) }
     }
     
     @IBOutlet weak var updateTouchbar: NSMenuItem!
-    // MARK: Preferences
-    
-    let preferencesWindowController: NSWindowController = MASPreferencesWindowController(viewControllers: [GeneralPreferencesViewController(), AccountsPreferencesViewController()])
-    
+     
     // MARK: Data saving
     
     private static var supportFiles = [String]()
@@ -152,13 +144,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Create the menu item
         attachMenuItem()
-        
-        // Register dafault user preferences
-        registerDefaultPreferences()
-    }
-    
-    func registerDefaultPreferences() {
-        PreferenceKey.registerDefaults()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -1,7 +1,6 @@
-Muse.xcodeproj/xcuserdata/lyrae.xcuserdatad/xcdebugger/
-Muse/Muse.xcworkspace/xcshareddata/
-Muse/Muse.xcworkspace/xcuserdata/
+Muse.xcworkspace/xcshareddata/*
+Muse.xcodeproj/xcuserdata/*
+Muse.xcworkspace/xcuserdata/*
 Pods/
-Applications/*.zip
-Applications/*.app
-Applications/.tmp
+.DS_Store
+
