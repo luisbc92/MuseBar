@@ -17,33 +17,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: Properties
     
-    let menuItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    
     // TODO: do this without callbacks!
     
     var windowToggledHandler: () -> () = { }
-
-    // MARK: Outlets
     
-    @IBOutlet weak var menuBarMenu: NSMenu!
-    
-    // MARK: Actions
-    
-    @IBAction func toggleWindowMenuItemClicked(_ sender: Any) {
-        // Show window
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        //windowToggledHandler()
-    }
-    
-    @IBAction func quitMenuItemClicked(_ sender: Any) {
-        // Quit the application
-        NSApplication.shared.terminate(self)
-    }
-    
-    @IBAction func customizeTouchBar(_ sender: NSMenuItem) {
-        if #available(OSX 10.12.2, *) { NSApp.toggleTouchBarCustomizationPalette(self) }
-    }
-         
     // MARK: Data saving
     
     private static var supportFiles = [String]()
@@ -129,19 +106,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: Functions
     
-    func attachMenuItem() {
-        // Set the menu for the item
-        menuItem.menu = menuBarMenu
-    }
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Enable TouchBar overlay if 10.12.2
         if #available(OSX 10.12.2, *) {
             NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
         }
-        
-        // Create the menu item
-        attachMenuItem()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -149,4 +118,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
 }
-

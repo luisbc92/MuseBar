@@ -27,6 +27,7 @@ import Cocoa
     // Popover TouchBar identifiers
     static let soundSlider                = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.soundSlider")
     static let shuffleRepeatSegmentedView = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.shuffleRepeatSegmentedView")
+    static let quitButton = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.quitButton")
 }
 
 @available(OSX 10.12.2, *)
@@ -65,7 +66,8 @@ extension WindowController: NSTouchBarDelegate {
         touchBar.delegate                = self
         touchBar.customizationIdentifier = .popoverBar
         touchBar.defaultItemIdentifiers  = [.shuffleRepeatSegmentedView,
-                                            .soundSlider]
+                                            .soundSlider,
+                                            .quitButton]
         
         return touchBar
     }
@@ -157,6 +159,13 @@ extension WindowController: NSTouchBarDelegate {
                 shuffleRepeatSegmentedView = item.view as? NSSegmentedControl
                 prepareShuffleRepeatSegmentedView()
             }
+        case .quitButton:
+            return createItem(identifier: identifier, view: quitButton) { item in
+                quitButton         = item.view as? NSButton
+                quitButton?.title  = "Quit"
+                quitButton?.action = #selector(quitButtonClicked(_:))
+                prepareQuitButton()
+            }
         default:
             return nil
         }
@@ -243,7 +252,7 @@ extension WindowController: NSTouchBarDelegate {
                 button.imagePosition = .imageLeading
 //                button.addTouchBarButtonWidthConstraint()
                 customItem.view = button
-            case .likeButton:
+            case .likeButton, .quitButton:
                 let button = NSButton(title: "",
                                       target: self,
                                       action: nil)

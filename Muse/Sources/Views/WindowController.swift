@@ -70,6 +70,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     weak var soundPopoverButton:         NSPopoverTouchBarItem?
     weak var soundSlider:                NSSliderTouchBarItem?
     weak var shuffleRepeatSegmentedView: NSSegmentedControl?
+    weak var quitButton:                 NSButton?
     
     // MARK: Vars
     
@@ -168,6 +169,11 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         if var helper = helper as? LikablePlayerHelper {
             helper.toggleLiked()
         }
+    }
+    
+    @objc func quitButtonClicked(_ sender: NSButton) {
+        // Quit the app
+        NSApplication.shared.terminate(self)
     }
     
     // MARK: SliderDelegate implementation
@@ -736,6 +742,11 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         updateShuffleRepeatSegmentedView()
     }
     
+    func prepareQuitButton() {
+        quitButton?.target       = self
+        quitButton?.action       = #selector(quitButtonClicked(_:))
+    }
+    
     // MARK: ViewController communication
     
     var viewController: NSViewController? {
@@ -913,9 +924,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Play/pause notification
         updateControlsAfterPlayPause()
         
-        // Update menuBar title
-        updateMenuBar()
-        
         // Set play/pause and update elapsed time on the TouchBar
         updatePlaybackState()
         updateNowPlayingInfoElapsedPlaybackTime(with: helper.playbackPosition)
@@ -1091,19 +1099,12 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
             // Also update TouchBar media controls
             updateNowPlayingInfo()
         }
-        
-        updateMenuBar()
     }
     
     func updateUIAfterNotification() {
         isUIPlaying = helper.isPlaying
         
         updateTouchBarUI()
-    }
-    
-    func updateMenuBar() {
-        guard let delegate = self.delegate else { return }
-        delegate.menuItem.title = "♫"
     }
     
     var image: NSImage = .defaultBg {
