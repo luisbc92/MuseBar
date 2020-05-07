@@ -250,13 +250,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         case KeyCombination(.command, kVK_ANSI_V):
             setPlayerHelper(to: .vox)
             return true
-        case kVK_Escape:
-            onViewController {
-                if !$0.handleEscape() {
-                    if let window = self.window { window.setVisibility(false) }
-                }
-            }
-            return true
         case kVK_LeftArrow, kVK_ANSI_A:
             helper.previousTrack()
             return true
@@ -266,15 +259,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         case kVK_RightArrow, kVK_ANSI_D:
             helper.nextTrack()
             return true
-        case kVK_UpArrow, kVK_DownArrow:
-            onViewController { $0.handleArrowKeysOrReturn() }
-            return true
-        case kVK_Return:
-            onViewController { [weak self] in
-                if !$0.handleArrowKeysOrReturn() {
-                    self?.showPlayer()
-                }
-            }
         case kVK_ANSI_W:
             showPlayer()
             return true
@@ -579,11 +563,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Update control strip button title
         updateControlStripButton()
         
-        // Peek title of currently playing track
-        self.onViewController { controller in
-            controller.showTitleView()
-        }
-        
         toggleControlStripButton(visible: false)
         
         // Invalidate TouchBar to make it reload
@@ -603,12 +582,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         eventSentFromApp = false
         
         toggleControlStripButton(visible: true)
-        
-        // End search in VC
-        onViewController {
-            // TODO: implement this in some other way
-            $0.endSearch(canceled: true)
-        }
     }
     
     func toggleControlStripButton(visible: Bool = false) {
@@ -618,9 +591,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     func prepareWindow() {
         guard let window = self.window else { return }
-        
-        //Connects the menubar items action
-        delegate?.updateTouchbar.action = #selector(updateTouchBar)
         
         window.titleVisibility = NSWindow.TitleVisibility.hidden;
         window.titlebarAppearsTransparent = true
@@ -768,15 +738,8 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     // MARK: ViewController communication
     
-    var viewController: ViewController? {
-        return self.contentViewController as? ViewController
-    }
-    
-    func onViewController(block: @escaping @convention(block) (ViewController) -> Swift.Void) {
-        guard let controller = viewController else { return }
-        
-        // Pass controller to the block
-        block(controller)
+    var viewController: NSViewController? {
+        return self.contentViewController
     }
     
     // MARK: URL events handling
@@ -1021,11 +984,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         
         // Also update native touchbar scrubber
         updateNowPlayingInfoElapsedPlaybackTime(with: position)
-        
-        // And the View's slider
-        onViewController { controller in
-            controller.updateSongProgressSlider(with: position / self.song.duration)
-        }
     }
     
     @objc func syncSongProgressSlider() {
@@ -1044,10 +1002,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         
         controlsSegmentedView?.setImage(isUIPlaying ? .pause : .play,
                                         forSegment: 1)
-        
-        onViewController { controller in
-            controller.updateButtons()
-        }
     }
     
     func setShuffleRepeatSegmentedView(shuffleSelected: Bool? = nil, repeatSelected: Bool? = nil) {
@@ -1066,11 +1020,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Convenience call for updating the 'repeat' and 'shuffle' buttons
         setShuffleRepeatSegmentedView(shuffleSelected: helper.shuffling,
                                       repeatSelected: helper.repeating)
-        
-        onViewController { [weak self] controller in
-            controller.updateShuffleRepeatButtons(shuffling: self?.helper.shuffling,
-                                                  repeating: self?.helper.repeating)
-        }
     }
     
     func updateLikeButton(newValue: Bool? = nil) {
@@ -1100,11 +1049,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     func setLikeButton(value: Bool) {
         likeButton?.image = value ? .liked : .like
-        
-        // Update VC's like button
-        self.onViewController { controller in
-            controller.updateLikeButton(liked: value)
-        }
     }
     
     func updateLikeButtonColdStart() {
@@ -1155,8 +1099,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         isUIPlaying = helper.isPlaying
         
         updateTouchBarUI()
-        
-        updateViewUI()
     }
     
     func updateMenuBar() {
@@ -1167,11 +1109,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     var image: NSImage = .defaultBg {
         didSet {
             self.updateArtworkColorAndSize(for: image)
-            
-            // Set image on ViewController when downloaded
-            self.onViewController { controller in
-                controller.updateFullSongArtworkView(with: self.image)
-            }
         }
     }
     
@@ -1202,10 +1139,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         } else {
             self.image = NSImage.defaultBg
         }
-    }
-    
-    @objc func updateTouchBar(_ sender: NSMenuItem){
-        updateTouchBarUI()
     }
     
     func updateTouchBarUI() {
@@ -1268,18 +1201,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
            (self.soundPopoverButton?.collapsedRepresentation as? NSButton)?.bezelColor=temp
 //            self.controlsSegmentedView?.layer?.backgroundColor = temp?.cgColor
 //            self.controlsSegmentedView?.layer?.cornerRadius = 8
-            
-            // Set colors on main view
-            self.onViewController { controller in
-                controller.colorViews(with: colors)
-            }
-        }
-    }
-    
-    func updateViewUI() {
-        onViewController { controller in
-            controller.updateTitleAlbumArtistView(for: self.song)
-            controller.updateButtons()
         }
     }
     

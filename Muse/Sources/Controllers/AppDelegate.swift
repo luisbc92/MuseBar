@@ -43,9 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func customizeTouchBar(_ sender: NSMenuItem) {
         if #available(OSX 10.12.2, *) { NSApp.toggleTouchBarCustomizationPalette(self) }
     }
-    
-    @IBOutlet weak var updateTouchbar: NSMenuItem!
-     
+         
     // MARK: Data saving
     
     private static var supportFiles = [String]()
