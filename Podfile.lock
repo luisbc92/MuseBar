@@ -1,21 +1,29 @@
 PODS:
+  - LoginServiceKit (2.2.0)
   - SpotifyKit (0.0.6)
 
 DEPENDENCIES:
+  - LoginServiceKit (from `https://github.com/Clipy/LoginServiceKit.git`)
   - SpotifyKit (from `https://github.com/xzzz9097/SpotifyKit.git`)
 
 EXTERNAL SOURCES:
+  LoginServiceKit:
+    :git: https://github.com/Clipy/LoginServiceKit.git
   SpotifyKit:
     :git: https://github.com/xzzz9097/SpotifyKit.git
 
 CHECKOUT OPTIONS:
+  LoginServiceKit:
+    :commit: d8c24ad7e9b48294a8ae47f94bb1debeba74e102
+    :git: https://github.com/Clipy/LoginServiceKit.git
   SpotifyKit:
     :commit: 362990b7030cc0e502eddc03681fc4d8cf2cd266
     :git: https://github.com/xzzz9097/SpotifyKit.git
 
 SPEC CHECKSUMS:
+  LoginServiceKit: 3c86ce2f2bcd1e373326839d6d863d8a6a5915b4
   SpotifyKit: 20abf7e1e170e35683ecbe6d93598e91d4e7b6ab
 
-PODFILE CHECKSUM: f91777f31777e70a1f1fde0b68de3e0366fff5a1
+PODFILE CHECKSUM: d6489e40cf85d22636f2ddbf56baa992e05d66c0
 
 COCOAPODS: 1.9.1

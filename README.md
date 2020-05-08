@@ -19,7 +19,7 @@ At first start you'll be prompted to log into your Spotify account. It's not str
 ### Usage
 When you open Muse Bar you'll see a new button as the leftmost part of the control strip on your Touch Bar.
 
-- Tap it to play/pause.
+- Tap to play/pause.
 - Flick left/right to go to the previous/next song.
 - Long tap to show Muse Bar controls.
 

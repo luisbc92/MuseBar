@@ -22,12 +22,12 @@ import Cocoa
     static let controlsSegmentedView       = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.controlsSegmentedView")
     static let likeButton                 = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.likeButton")
     static let soundPopoverButton         = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.soundPopoverButton")
-    static let fixedSpace = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.fixedSpace")
     
     // Popover TouchBar identifiers
     static let soundSlider                = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.soundSlider")
     static let shuffleRepeatSegmentedView = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.shuffleRepeatSegmentedView")
     static let quitButton = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.quitButton")
+    static let launchAtLoginButton = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.launchAtLoginButton")
 }
 
 @available(OSX 10.12.2, *)
@@ -46,9 +46,7 @@ extension WindowController: NSTouchBarDelegate {
                                             .songProgressSlider,
                                             .controlsSegmentedView,
                                             .likeButton,
-                                            .soundPopoverButton,
-                                            .fixedSpace,
-                                            .flexibleSpace]
+                                            .soundPopoverButton]
         
         // Allow customization of NSTouchBar items
         touchBar.customizationAllowedItemIdentifiers = touchBar.defaultItemIdentifiers
@@ -67,6 +65,7 @@ extension WindowController: NSTouchBarDelegate {
         touchBar.customizationIdentifier = .popoverBar
         touchBar.defaultItemIdentifiers  = [.shuffleRepeatSegmentedView,
                                             .soundSlider,
+                                            .launchAtLoginButton,
                                             .quitButton]
         
         return touchBar
@@ -127,16 +126,6 @@ extension WindowController: NSTouchBarDelegate {
                 soundPopoverButton?.pressAndHoldTouchBar = popoverBar!
                 updateSoundPopoverButton(for: helper.volume)
             }
-        case .fixedSpace:
-            let temp = NSCustomTouchBarItem(identifier: identifier)
-            let k = NSRect(x: 0, y: 0, width: 5, height: 5)
-            let y = NSBox(frame: k)
-            y.title = "                        "
-            temp.view=y
-            temp.customizationLabel = "Small Fixed Space"
-            temp.view.acceptsTouchEvents=false
-            
-            return temp
         default:
             return nil
         }
@@ -158,6 +147,11 @@ extension WindowController: NSTouchBarDelegate {
             return createItem(identifier: identifier, view: shuffleRepeatSegmentedView) { item in
                 shuffleRepeatSegmentedView = item.view as? NSSegmentedControl
                 prepareShuffleRepeatSegmentedView()
+            }
+        case .launchAtLoginButton:
+            return createItem(identifier: identifier, view: launchAtLoginButton) { item in
+                launchAtLoginButton         = item.view as? NSSegmentedControl
+                prepareLaunchAtLoginButton()
             }
         case .quitButton:
             return createItem(identifier: identifier, view: quitButton) { item in
@@ -259,7 +253,7 @@ extension WindowController: NSTouchBarDelegate {
                 button.imagePosition = .imageOnly
                 button.addTouchBarButtonWidthConstraint()
                 customItem.view = button
-            case .controlsSegmentedView, .shuffleRepeatSegmentedView:
+            case .controlsSegmentedView, .shuffleRepeatSegmentedView, .launchAtLoginButton:
                 customItem.view = NSSegmentedControl()
             default:
                 break

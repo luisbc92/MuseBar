@@ -107,9 +107,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Functions
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        quitOtherMuseBarInstanceIfNeeded()
+        PFMoveToApplicationsFolderIfNecessary()
         // Enable TouchBar overlay if 10.12.2
         if #available(OSX 10.12.2, *) {
             NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
+        }
+    }
+    
+    func isRunningFromApplicationsFolder() -> Bool {
+        if let path = NSWorkspace.shared.fullPath(forApplication: "Muse Bar") {
+            return Bundle.main.bundleURL == URL(fileURLWithPath: path)
+        } else {
+            return false
+        }
+    }
+    
+    func quitOtherMuseBarInstanceIfNeeded() {
+        let runningApplications = NSWorkspace.shared.runningApplications
+        if let museBar = runningApplications.first(where: { (application) in
+            application.bundleIdentifier == "com.matanm.MuseBar" && application.bundleURL != Bundle.main.bundleURL
+        }) {
+            museBar.terminate()
         }
     }
     

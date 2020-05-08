@@ -9,6 +9,7 @@
 import Cocoa
 import Carbon.HIToolbox
 import MediaPlayer
+import LoginServiceKit
 
 @available(OSX 10.12.2, *)
 fileprivate extension NSTouchBarItem.Identifier {
@@ -70,6 +71,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     weak var soundPopoverButton:         NSPopoverTouchBarItem?
     weak var soundSlider:                NSSliderTouchBarItem?
     weak var shuffleRepeatSegmentedView: NSSegmentedControl?
+    weak var launchAtLoginButton:        NSSegmentedControl?
     weak var quitButton:                 NSButton?
     
     // MARK: Vars
@@ -152,7 +154,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         }
     }
     
-    @IBAction func soundSliderValueChanged(_ sender: NSSliderTouchBarItem) {
+    @objc func soundSliderValueChanged(_ sender: NSSliderTouchBarItem) {
         // Set the volume on the player
         helper.volume = sender.slider.integerValue
         
@@ -169,6 +171,15 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         if var helper = helper as? LikablePlayerHelper {
             helper.toggleLiked()
         }
+    }
+    
+    @objc func launchAtLoginButtonClicked(_ sender: NSSegmentedControl) {
+        if LoginServiceKit.isExistLoginItems() {
+            LoginServiceKit.removeLoginItems()
+        } else {
+            LoginServiceKit.addLoginItems()
+        }
+        updateLaunchAtLoginButton()
     }
     
     @objc func quitButtonClicked(_ sender: NSButton) {
@@ -510,6 +521,9 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Sync shuffling and repeating segmented control
         prepareShuffleRepeatSegmentedView()
         
+        // Sync Launch at Login status
+        prepareLaunchAtLoginButton()
+        
         // Get song details
         prepareSong()
         
@@ -678,6 +692,18 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         shuffleRepeatSegmentedView?.setImage(.repeating, forSegment: 1)
         
         updateShuffleRepeatSegmentedView()
+    }
+    
+    func prepareLaunchAtLoginButton() {
+        launchAtLoginButton?.target       = self
+        launchAtLoginButton?.segmentCount = 1
+        launchAtLoginButton?.segmentStyle = .separated
+        launchAtLoginButton?.trackingMode = .selectAny
+        launchAtLoginButton?.action       = #selector(launchAtLoginButtonClicked(_:))
+        
+        launchAtLoginButton?.setLabel("Launch at Login", forSegment: 0)
+        
+        updateLaunchAtLoginButton()
     }
     
     func prepareQuitButton() {
@@ -957,6 +983,11 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         if let repeatSelected = repeatSelected {
             shuffleRepeatSegmentedView?.setSelected(repeatSelected, forSegment: 1)
         }
+    }
+    
+    func updateLaunchAtLoginButton() {
+        // Update Launch at Login status
+        launchAtLoginButton?.setSelected(LoginServiceKit.isExistLoginItems(), forSegment: 0)
     }
     
     func updateShuffleRepeatSegmentedView() {
