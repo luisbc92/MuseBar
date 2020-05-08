@@ -107,7 +107,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Functions
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        quitOtherMuseBarInstanceIfNeeded()
+        if !isRunningFromApplicationsFolder() {
+            quitOtherMuseBarInstanceIfNeeded()
+        }
         PFMoveToApplicationsFolderIfNecessary()
         // Enable TouchBar overlay if 10.12.2
         if #available(OSX 10.12.2, *) {

@@ -530,7 +530,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Update control strip button title
         updateControlStripButton()
         
-        toggleControlStripButton(visible: true)
+        toggleControlStripButton()
         
         // Invalidate TouchBar to make it reload
         // This ensures it's always correctly displayed
@@ -547,13 +547,14 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     func windowDidResignKey(_ notification: Notification) {
         // Make sure we reset sent event variable
         eventSentFromApp = false
-        
-        toggleControlStripButton(visible: true)
     }
     
-    func toggleControlStripButton(visible: Bool = false) {
-        controlStripButton?.animator().isHidden  = !visible
-        controlStripItem.isPresentInControlStrip = visible
+    func toggleControlStripButton() {
+        controlStripButton?.animator().isHidden  = false
+        controlStripItem.isPresentInControlStrip = true
+        DispatchQueue.main.run(after: 200) {
+            self.toggleControlStripButton()
+        }
     }
     
     func prepareWindow() {
@@ -767,9 +768,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Reset and reload touchBar when system wakes up
         touchBar                = nil
         didPresentAsSystemModal = false
-        
-        // Update control strip button visibility
-        toggleControlStripButton(visible: true)
     }
     
     func initPlayerNotificationWatchers() {
@@ -839,12 +837,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         }
         
         trackSongProgress()
-        
-        // If window is not key, restore control strip button visibility
-        // TODO: improve control on when the button should be refreshed
-        if let key = window?.isKeyWindow, !key, !eventSentFromApp {
-            toggleControlStripButton(visible: true)
-        }
         
         // Reset event sending check
         eventSentFromApp = false
@@ -961,7 +953,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
             resetSong()
             return
         }
-        
         // Convenience call for updating the progress slider during playback
         if !isSliding { updateSongProgressSlider() }
     }

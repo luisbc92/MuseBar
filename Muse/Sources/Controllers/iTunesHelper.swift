@@ -239,7 +239,7 @@ class iTunesHelper: PlayerHelper, LikablePlayerHelper, InternalPlayerHelper, Lik
     func play(_ address: String) {
         // Build an AppleScript query to play our track
         // because ScriptingBridge binding for opening a file seems broken
-        let query = "tell application \"iTunes\"\n play POSIX file \"\(address)\" \nend tell"
+        let query = "tell application \"\(iTunesHelper.iTunesName)\"\n play POSIX file \"\(address)\" \nend tell"
         
         NSAppleScript(source: query)?.executeAndReturnError(nil)
     }
@@ -265,14 +265,22 @@ class iTunesHelper: PlayerHelper, LikablePlayerHelper, InternalPlayerHelper, Lik
      */
     func play(playlist: String) {
         // Build an AppleScript query to play our playlist
-        let query = "tell application \"iTunes\"\n play user playlist named \"\(playlist)\" \nend tell"
+        let query = "tell application \"\(iTunesHelper.iTunesName)\"\n play user playlist named \"\(playlist)\" \nend tell"
         
         NSAppleScript(source: query)?.executeAndReturnError(nil)
     }
     
     // MARK: Application identifier
     
-    static let BundleIdentifier = "com.apple.iTunes"
+    static let BundleIdentifier = "com.apple.\(iTunesName)"
+    
+    static var iTunesName: String {
+        if #available(macOS 10.15, *) {
+              return "Music"
+        } else {
+              return "iTunes"
+        }
+    }
     
     // MARK: Notification ID
     
