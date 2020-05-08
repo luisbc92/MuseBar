@@ -336,7 +336,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     func prepareControlStripButton() {
         controlStripButton = NSCustomizableButton(
-            title: "11:11",
+            title: musicSymbol,
             target: self,
             action: #selector(triggerPlayPause),
             hasRoundedLeadingImage: false
@@ -355,9 +355,35 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     func updateControlStripButton() {
         if song.isValid && helper.isPlaying {
-            controlStripButton?.title = helper.playbackPosition.secondsToMMSSString
+            controlStripButton?.title = pauseSymbol
+        } else if song.isValid && !helper.isPlaying {
+            controlStripButton?.title = playSymbol
         } else {
-            controlStripButton?.title = "♫"
+            controlStripButton?.title = musicSymbol
+        }
+    }
+    
+    var pauseSymbol: String {
+        if #available(macOS 10.15, *) {
+              return "􀊆"
+        } else {
+              return "⏸"
+        }
+    }
+    
+    var playSymbol: String {
+        if #available(macOS 10.15, *) {
+              return "􀊄"
+        } else {
+              return "▶️"
+        }
+    }
+    
+    var musicSymbol: String {
+        if #available(macOS 10.15, *) {
+              return "􀑪"
+        } else {
+              return "🎵"
         }
     }
     
@@ -423,8 +449,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
      Reveals the designated NSTouchBar when control strip button @objc is pressed
     */
     @objc func triggerPlayPause() {
-        updatePopoverButtonForControlStrip()
-        
         helper.togglePlayPause()
     }
     
@@ -465,6 +489,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Show window
         window?.makeKeyAndOrderFront(self)
         NSApp.activate(ignoringOtherApps: true)
+        NSApp.hide(self)
     }
     
     func windowDidBecomeKey(_ notification: Notification) {
@@ -485,10 +510,13 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         // Sync shuffling and repeating segmented control
         prepareShuffleRepeatSegmentedView()
         
+        // Get song details
+        prepareSong()
+        
         // Update control strip button title
         updateControlStripButton()
         
-        toggleControlStripButton(visible: false)
+        toggleControlStripButton(visible: true)
         
         // Invalidate TouchBar to make it reload
         // This ensures it's always correctly displayed
@@ -543,6 +571,11 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         updateAfterNotification()
         
         trackSongProgress()
+        
+        self.helper.updatePlayer()
+        DispatchQueue.main.run(after: 500) {
+            self.helper.updatePlayer()
+        }
     }
     
     func prepareButtons() {
@@ -859,9 +892,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         } else {
             syncSongProgressSlider()
         }
-        
-        // Update control strip button title
-        updateControlStripButton()
     }
     
     func deinitSongTrackingTimer() {
@@ -892,7 +922,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         songProgressSlider?.doubleValue = position / song.duration
         
         if isUIPlaying {
-            controlStripButton?.title = position.secondsToMMSSString
+            updateControlStripButton()
         }
         
         // Also update native touchbar scrubber

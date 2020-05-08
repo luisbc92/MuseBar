@@ -58,6 +58,8 @@ protocol PlayerHelper {
     
     // MARK: Playback status
     
+    func updatePlayer()
+    
     var playerState: PlayerState { get }
     
     var playbackPosition: Double { set get }
@@ -129,6 +131,11 @@ protocol PlayablePlayerHelper {
 extension PlayerHelper where Self: InternalPlayerHelper {
     
     // MARK: Playback controls
+    
+    func updatePlayer() {
+        togglePlayPause()
+        togglePlayPause()
+    }
     
     func play() {
         self.internalPlay()

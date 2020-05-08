@@ -125,6 +125,7 @@ extension WindowController {
     
     func updatePlaybackState() {
         nowPlayingInfoCenter.playbackState = helper.isPlaying ? .playing : .paused
+        updateControlStripButton()
     }
     
 }
