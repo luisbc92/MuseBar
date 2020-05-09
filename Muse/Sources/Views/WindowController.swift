@@ -351,55 +351,45 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     func prepareControlStripButton() {
         controlStripButton = NSCustomizableButton(
-            title: musicSymbol,
+            title: musicSymbol.string,
             target: self,
             action: #selector(triggerPlayPause),
             hasRoundedLeadingImage: false
         )
         
         controlStripButton?.textColor     = NSColor.white.withAlphaComponent(0.8)
-        controlStripButton?.font          = NSFont.monospacedDigitSystemFont(ofSize: 16.0,
-                                                                             weight: NSFont.Weight.regular)
+        controlStripButton?.font = NSFont(name: "SF Pro Text", size: 18.0)
+        
         controlStripButton?.imagePosition = .imageOverlaps
         controlStripButton?.isBordered    = false
         controlStripButton?.imageScaling  = .scaleNone
         
         controlStripButton?.addGestureRecognizer(controlStripButtonPressureGestureRecognizer)
         controlStripButton?.addGestureRecognizer(controlStripButtonPanGestureRecognizer)
+        
+        updateControlStripButton()
     }
     
     func updateControlStripButton() {
         if song.isValid && helper.isPlaying {
-            controlStripButton?.title = pauseSymbol
+            controlStripButton?.attributedTitle = pauseSymbol
         } else if song.isValid && !helper.isPlaying {
-            controlStripButton?.title = playSymbol
+            controlStripButton?.attributedTitle = playSymbol
         } else {
-            controlStripButton?.title = musicSymbol
+            controlStripButton?.attributedTitle = musicSymbol
         }
     }
     
-    var pauseSymbol: String {
-        if #available(macOS 10.15, *) {
-              return "􀊆"
-        } else {
-              return "⏸"
-        }
+    var pauseSymbol: NSAttributedString {
+        return NSAttributedString(string: "􀊆", attributes: [.baselineOffset: 1.5])
     }
     
-    var playSymbol: String {
-        if #available(macOS 10.15, *) {
-              return "􀊄"
-        } else {
-              return "▶️"
-        }
+    var playSymbol: NSAttributedString {
+        return NSAttributedString(string: "􀊄", attributes: [.baselineOffset: 1.5])
     }
     
-    var musicSymbol: String {
-        if #available(macOS 10.15, *) {
-              return "􀑪"
-        } else {
-              return "🎵"
-        }
+    var musicSymbol: NSAttributedString {
+        return NSAttributedString(string: "􀑪", attributes: [.baselineOffset: 1.5])
     }
     
     /**
