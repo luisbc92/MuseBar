@@ -69,7 +69,18 @@ class SpotifyHelper: PlayerHelper, LikablePlayerHelper, InternalPlayerHelper, Li
     // The SBApplication object buond to the helper class
     private let application: SpotifyApplication? = SBApplication.init(bundleIdentifier: BundleIdentifier)
     
-    private init() {
+    private var didAuthorize = false
+    
+    // MARK: Player features
+    
+    let doesSendPlayPauseNotification = true
+    
+    /**
+     Authorize Spotify
+    */
+    func authorizeIfNeeded() {
+        if didAuthorize { return }
+        didAuthorize = true
         if !spotifyManager.hasToken {
             // Try to authenticate if there's no token
             spotifyManager.authorize()
@@ -78,10 +89,6 @@ class SpotifyHelper: PlayerHelper, LikablePlayerHelper, InternalPlayerHelper, Li
             spotifyManager.refreshToken { _ in }
         }
     }
-    
-    // MARK: Player features
-    
-    let doesSendPlayPauseNotification = true
     
     // MARK: Swiftify methods
     

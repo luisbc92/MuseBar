@@ -11,7 +11,9 @@ An open-source Spotify, Apple Music and Vox system-wide Touch Bar controller.
 <img src=Screenshots/Muse%20Bar%20Secondary.png>
 
 ### Installation
-At first start you'll be prompted to log into your Spotify account. It's not strictly necessary but it allows adding/removing favourites to your library.
+Just download the zip file and open the app.
+
+If you're using Spotify you'll be prompted to log into your Spotify account. It's not strictly necessary but it allows adding/removing favourites to your library. There’s no server side logic, everything runs on your Mac.
 
 ### Usage
 When you open Muse Bar you'll see a new button at the leftmost part of the control strip on your Touch Bar, displaying album art and playback action.
@@ -36,3 +38,4 @@ git clone https://github.com/planecore/MuseBar && cd MuseBar/ && pod install && 
 - [SpotifyKit](https://github.com/xzzz9097/SpotifyKit) by @xzzz9097
 - [NSImageColors](https://github.com/xzzz9097/NSImageColors) by @jathu
 - [LoginServiceKit](https://github.com/Clipy/LoginServiceKit) by @Econa77
+- [LetsMove](https://github.com/potionfactory/LetsMove) by @potionfactory

@@ -44,7 +44,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     // MARK: Timers
     
     var songTrackingTimer = Timer()
-    var autoCloseTimer    = Timer()
     
     // MARK: Keys
     
@@ -257,6 +256,11 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         
         // Update timing
         trackSongProgress()
+        
+        // Authorize Spotify if needed
+        if id == .spotify {
+            SpotifyHelper.shared.authorizeIfNeeded()
+        }
     }
     
     // MARK: Callbacks
@@ -710,12 +714,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     func prepareQuitButton() {
         quitButton?.target       = self
         quitButton?.action       = #selector(quitButtonClicked(_:))
-    }
-    
-    // MARK: ViewController communication
-    
-    var viewController: NSViewController? {
-        return self.contentViewController
     }
     
     // MARK: URL events handling
