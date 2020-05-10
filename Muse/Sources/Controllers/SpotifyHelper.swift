@@ -141,7 +141,7 @@ class SpotifyHelper: PlayerHelper, LikablePlayerHelper, InternalPlayerHelper, Li
         
         // AppleScript returns "spotify:track:id"
         // We need to cut the initial part of the string
-        return id.substring(from: id.index(id.startIndex, offsetBy: 14))
+        return String(id[id.index(id.startIndex, offsetBy: 14)...])
     }
     
     // MARK: Playback controls
@@ -338,7 +338,7 @@ class SpotifyHelper: PlayerHelper, LikablePlayerHelper, InternalPlayerHelper, Li
         spotifyManager.myProfile { profile in
             guard let imageURL = URL(string: profile.artUri) else { return }
             
-            NSImage.download(from: imageURL, fallback: NSImage(named: NSImage.Name.userAccounts)!) {
+            NSImage.download(from: imageURL, fallback: NSImage(named: NSImage.userAccountsName)!) {
                 completionHandler(Account(username: profile.name,
                                           email: profile.email ?? "",
                                           image: $0.oval()))

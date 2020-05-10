@@ -47,7 +47,7 @@ extension Double {
      Initializes a 'Double' from a MM:SS formatted 'String'
      */
     init?(MMSSString: String) {
-        let digits = MMSSString.split(separator: ":").flatMap { Double($0) }
+        let digits = MMSSString.split(separator: ":").compactMap { Double($0) }
         
         if digits.count == 2, let minutes = digits.first, let seconds = digits.last {
             self = minutes * 60 + seconds

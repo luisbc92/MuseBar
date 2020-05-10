@@ -10,8 +10,8 @@ import Cocoa
 
  @available(OSX 10.12.2, *)
  fileprivate extension NSTouchBar.CustomizationIdentifier {
-    static let windowBar  = NSTouchBar.CustomizationIdentifier("\(Bundle.main.bundleIdentifier!).windowBar")
-    static let popoverBar = NSTouchBar.CustomizationIdentifier("\(Bundle.main.bundleIdentifier!).popoverBar")
+    static let windowBar  = "\(Bundle.main.bundleIdentifier!).windowBar"
+    static let popoverBar = "\(Bundle.main.bundleIdentifier!).popoverBar"
 }
 
  @available(OSX 10.12.2, *)

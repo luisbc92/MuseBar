@@ -20,7 +20,7 @@ extension String {
         guard self.count > length else { return self }
         
         // Split string till limited index
-        var truncated = self.substring(to: self.index(self.startIndex, offsetBy: length))
+        var truncated = String(self[..<self.index(startIndex, offsetBy: length)])
         
         if truncated.last == " " {
             // Remove last character if it's a space

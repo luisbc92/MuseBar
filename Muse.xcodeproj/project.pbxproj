@@ -44,9 +44,9 @@
 		0CFF46711DE3826300A3BE8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CFF466F1DE3826300A3BE8E /* Main.storyboard */; };
 		0CFF46951DE382BA00A3BE8E /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF46941DE382BA00A3BE8E /* WindowController.swift */; };
 		0CFF46971DE383A300A3BE8E /* SpotifyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF46961DE383A300A3BE8E /* SpotifyHelper.swift */; };
-		9049663D246754D40029D491 /* SF-Pro-Text-Regular.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9049663B246754780029D491 /* SF-Pro-Text-Regular.otf */; };
 		9097FF3B246570AC00BC1E74 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 9097FF3A246570AC00BC1E74 /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9097FF3C2465711300BC1E74 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900F9D972465699100F4EE01 /* Security.framework */; };
+		90C03B1A24683CDF00A2C90C /* SF-Pro-Text-Regular.otf in Copy Fonts */ = {isa = PBXBuildFile; fileRef = 90C03B1824683CD000A2C90C /* SF-Pro-Text-Regular.otf */; };
 		AB321B77C515D4A6FAA50685 /* Pods_Muse_Bar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF43A1BF6229098A92964A4C /* Pods_Muse_Bar.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,14 +103,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9049663C246754B40029D491 /* CopyFiles */ = {
+		9049663C246754B40029D491 /* Copy Fonts */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Fonts;
 			dstSubfolderSpec = 7;
 			files = (
-				9049663D246754D40029D491 /* SF-Pro-Text-Regular.otf in CopyFiles */,
+				90C03B1A24683CDF00A2C90C /* SF-Pro-Text-Regular.otf in Copy Fonts */,
 			);
+			name = "Copy Fonts";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -170,10 +171,10 @@
 		1E0C322245B2C90A7AFF4109 /* Pods-Muse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muse/Pods-Muse.release.xcconfig"; sourceTree = "<group>"; };
 		3B386AEF931048FC47B72C70 /* Pods-Muse Bar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse Bar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muse Bar/Pods-Muse Bar.debug.xcconfig"; sourceTree = "<group>"; };
 		900F9D972465699100F4EE01 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		9049663B246754780029D491 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		9097FF3224656F8600BC1E74 /* Muse.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Muse.entitlements; sourceTree = "<group>"; };
 		9097FF39246570AC00BC1E74 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
 		9097FF3A246570AC00BC1E74 /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
+		90C03B1824683CD000A2C90C /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		A0F98AF1FFD9DC6D89493CE6 /* Pods-Muse Bar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse Bar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muse Bar/Pods-Muse Bar.release.xcconfig"; sourceTree = "<group>"; };
 		A357F95C2564CE8DFC96DBCC /* Pods-Muse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muse/Pods-Muse.debug.xcconfig"; sourceTree = "<group>"; };
 		FF43A1BF6229098A92964A4C /* Pods_Muse_Bar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muse_Bar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -311,6 +312,7 @@
 				0CFF466D1DE3826300A3BE8E /* Assets.xcassets */,
 				0CFF466F1DE3826300A3BE8E /* Main.storyboard */,
 				0CA5FA611ED1DC9500248A91 /* dsa_pub.pem */,
+				90C03B1824683CD000A2C90C /* SF-Pro-Text-Regular.otf */,
 				0C9A60CE1DE79B1B0051CDC6 /* Muse-Bridging-Header.h */,
 				0CFF46721DE3826300A3BE8E /* Info.plist */,
 			);
@@ -342,7 +344,6 @@
 				0CFA8E291F7AEB2D00D1AE83 /* Libraries */,
 				0CFA8E231F7AE9F300D1AE83 /* Sources */,
 				0CFA8E2C1F7AECA200D1AE83 /* Resources */,
-				9049663A2467545A0029D491 /* Fonts */,
 			);
 			path = Muse;
 			sourceTree = "<group>";
@@ -379,14 +380,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9049663A2467545A0029D491 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				9049663B246754780029D491 /* SF-Pro-Text-Regular.otf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		9097FF38246570AB00BC1E74 /* LetsMove */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,7 +401,7 @@
 				0CFF46631DE3826300A3BE8E /* Frameworks */,
 				0CFF46641DE3826300A3BE8E /* Resources */,
 				1A4CC0C78FE35E1A8380752A /* [CP] Embed Pods Frameworks */,
-				9049663C246754B40029D491 /* CopyFiles */,
+				9049663C246754B40029D491 /* Copy Fonts */,
 			);
 			buildRules = (
 			);
@@ -432,7 +425,7 @@
 					0CFF46651DE3826300A3BE8E = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = T8HKXLJ6T3;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -729,18 +722,19 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = T8HKXLJ6T3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Muse/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 4.2.3;
+				MARKETING_VERSION = 4.2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.matanm.MuseBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Muse/Resources/Muse-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited) $(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
 			};
 			name = Debug;
@@ -755,17 +749,18 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = T8HKXLJ6T3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Muse/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 4.2.3;
+				MARKETING_VERSION = 4.2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.matanm.MuseBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Muse/Resources/Muse-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited) $(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
 			};
 			name = Release;

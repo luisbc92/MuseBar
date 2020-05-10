@@ -98,7 +98,7 @@ class ButtonCell: NSButtonCell {
         if hasRoundedLeadingImage { frame.origin.x += xOriginShiftDelta }
         
         let string = NSMutableAttributedString(attributedString: title)
-        string.addAttribute(NSAttributedStringKey.foregroundColor,
+        string.addAttribute(NSAttributedString.Key.foregroundColor,
                             value: textColor,
                             range: NSMakeRange(0, string.length))
         
