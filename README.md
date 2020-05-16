@@ -38,4 +38,4 @@ git clone https://github.com/planecore/MuseBar && cd MuseBar/ && pod install && 
 - [SpotifyKit](https://github.com/xzzz9097/SpotifyKit) by @xzzz9097
 - [NSImageColors](https://github.com/xzzz9097/NSImageColors) by @jathu
 - [LoginServiceKit](https://github.com/Clipy/LoginServiceKit) by @Econa77
-- [LetsMove](https://github.com/potionfactory/LetsMove) by @potionfactory
+- [AppMover](https://github.com/OskarGroth/AppMover) by @OskarGroth

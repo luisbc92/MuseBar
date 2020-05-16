@@ -44,7 +44,8 @@
 		0CFF46711DE3826300A3BE8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CFF466F1DE3826300A3BE8E /* Main.storyboard */; };
 		0CFF46951DE382BA00A3BE8E /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF46941DE382BA00A3BE8E /* WindowController.swift */; };
 		0CFF46971DE383A300A3BE8E /* SpotifyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF46961DE383A300A3BE8E /* SpotifyHelper.swift */; };
-		9097FF3B246570AC00BC1E74 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 9097FF3A246570AC00BC1E74 /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9021322C247002E200466EBB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9021322A247002E200466EBB /* Extensions.swift */; };
+		9021322D247002E200466EBB /* AppMover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9021322B247002E200466EBB /* AppMover.swift */; };
 		9097FF3C2465711300BC1E74 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900F9D972465699100F4EE01 /* Security.framework */; };
 		90C03B1A24683CDF00A2C90C /* SF-Pro-Text-Regular.otf in Copy Fonts */ = {isa = PBXBuildFile; fileRef = 90C03B1824683CD000A2C90C /* SF-Pro-Text-Regular.otf */; };
 		AB321B77C515D4A6FAA50685 /* Pods_Muse_Bar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF43A1BF6229098A92964A4C /* Pods_Muse_Bar.framework */; };
@@ -171,9 +172,9 @@
 		1E0C322245B2C90A7AFF4109 /* Pods-Muse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muse/Pods-Muse.release.xcconfig"; sourceTree = "<group>"; };
 		3B386AEF931048FC47B72C70 /* Pods-Muse Bar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse Bar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muse Bar/Pods-Muse Bar.debug.xcconfig"; sourceTree = "<group>"; };
 		900F9D972465699100F4EE01 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9021322A247002E200466EBB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9021322B247002E200466EBB /* AppMover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMover.swift; sourceTree = "<group>"; };
 		9097FF3224656F8600BC1E74 /* Muse.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Muse.entitlements; sourceTree = "<group>"; };
-		9097FF39246570AC00BC1E74 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
-		9097FF3A246570AC00BC1E74 /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
 		90C03B1824683CD000A2C90C /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		A0F98AF1FFD9DC6D89493CE6 /* Pods-Muse Bar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse Bar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muse Bar/Pods-Muse Bar.release.xcconfig"; sourceTree = "<group>"; };
 		A357F95C2564CE8DFC96DBCC /* Pods-Muse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muse/Pods-Muse.debug.xcconfig"; sourceTree = "<group>"; };
@@ -280,7 +281,7 @@
 		0CFA8E291F7AEB2D00D1AE83 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				9097FF38246570AB00BC1E74 /* LetsMove */,
+				90213229247002E200466EBB /* AppMover */,
 				0CFA8E2B1F7AEBF900D1AE83 /* DFRPrivate */,
 				0C9B62261E1C357100660633 /* NSImageColors.swift */,
 			);
@@ -380,13 +381,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9097FF38246570AB00BC1E74 /* LetsMove */ = {
+		90213229247002E200466EBB /* AppMover */ = {
 			isa = PBXGroup;
 			children = (
-				9097FF39246570AC00BC1E74 /* PFMoveApplication.h */,
-				9097FF3A246570AC00BC1E74 /* PFMoveApplication.m */,
+				9021322A247002E200466EBB /* Extensions.swift */,
+				9021322B247002E200466EBB /* AppMover.swift */,
 			);
-			path = LetsMove;
+			path = AppMover;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -586,7 +587,7 @@
 				0CFF46951DE382BA00A3BE8E /* WindowController.swift in Sources */,
 				0C5B6CC71F1E4D6D007DDC0F /* TouchBarMaker.swift in Sources */,
 				0C48DA421E181C0B0059BA69 /* PlayersManager.swift in Sources */,
-				9097FF3B246570AC00BC1E74 /* PFMoveApplication.m in Sources */,
+				9021322D247002E200466EBB /* AppMover.swift in Sources */,
 				0C4AC6B1210F811F0064D7BD /* Notification.swift in Sources */,
 				0CEAEB3F1E16624800BD68D5 /* DispatchQueue+Extensions.swift in Sources */,
 				0CC8466B1DF728AE00941787 /* MPRemoteCommand+Extensions.swift in Sources */,
@@ -599,6 +600,7 @@
 				0C474DB51F839C720067BC8C /* PlayerNotification.swift in Sources */,
 				0C474DB31F839BEB0067BC8C /* PlayerEvent.swift in Sources */,
 				0CDD1ADB1DF04B570027661A /* SliderCell.swift in Sources */,
+				9021322C247002E200466EBB /* Extensions.swift in Sources */,
 				0CA45AC31F17D0DB00B2DD21 /* DFRPrivateHeader.m in Sources */,
 				0CF8B7E41DF9772900CDD130 /* NSHoverableView.swift in Sources */,
 				0CD2870E1E106D4600EF0E73 /* NSImage+Extensions.swift in Sources */,
@@ -722,14 +724,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = K9889966NJ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Muse/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 4.2.5;
+				MARKETING_VERSION = 4.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.matanm.MuseBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -750,14 +752,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = K9889966NJ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Muse/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 4.2.5;
+				MARKETING_VERSION = 4.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.matanm.MuseBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

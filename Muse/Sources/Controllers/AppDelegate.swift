@@ -110,7 +110,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !isRunningFromApplicationsFolder() {
             quitOtherMuseBarInstanceIfNeeded()
         }
-        PFMoveToApplicationsFolderIfNecessary()
+        AppMover.moveIfNecessary()
         // Enable TouchBar overlay if 10.12.2
         if #available(OSX 10.12.2, *) {
             NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
