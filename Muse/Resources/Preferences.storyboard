@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="wIX-YV-IFe">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="VGe-qQ-egV">
+            <objects>
+                <windowController storyboardIdentifier="pref-window" id="wIX-YV-IFe" sceneMemberID="viewController">
+                    <window key="window" title="Auto Dark" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="q5Q-vT-42U">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
+                        <rect key="contentRect" x="163" y="208" width="300" height="350"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+                        <connections>
+                            <outlet property="delegate" destination="wIX-YV-IFe" id="qf1-pq-YWP"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="8lQ-qw-cjs" kind="relationship" relationship="window.shadowedContentViewController" id="9tG-BS-Gfh"/>
+                    </connections>
+                </windowController>
+                <customObject id="0dd-Eq-Gof" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="61" y="-25"/>
+        </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="2gK-UV-rqY">
+            <objects>
+                <viewController storyboardIdentifier="pref-controller" id="8lQ-qw-cjs" customClass="PreferencesViewController" customModule="Muse_Bar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="YyC-j1-lW2">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="underWindowBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="5va-gt-hPe">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </visualEffectView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltT-zv-ZcV">
+                                <rect key="frame" x="33" y="263" width="237" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Muse Bar" id="SS9-c5-nHR">
+                                    <font key="font" metaFont="systemBold" size="50"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ZS-Ng-wz7">
+                                <rect key="frame" x="18" y="213" width="221" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" inset="2" id="56B-P2-imb">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="autoUpdatesCheck:" target="8lQ-qw-cjs" id="CTX-cU-OL9"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Frx-V6-T4a">
+                                <rect key="frame" x="18" y="235" width="123" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Launch at Login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="fhn-Ob-yDG">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="launchAtLoginCheck:" target="8lQ-qw-cjs" id="m43-0I-Uxp"/>
+                                </connections>
+                            </button>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSk-pi-Mqe">
+                                <rect key="frame" x="13" y="180" width="150" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Check for Updates" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" inset="2" id="bdP-bu-Dzr">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="If7-w4-dyV" id="4on-FT-wsZ"/>
+                                </connections>
+                            </button>
+                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GNa-P2-mZN">
+                                <rect key="frame" x="60" y="54" width="183" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Upgraded by Matan Mashraki" id="fcd-m0-SWN">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IIU-T6-wtt">
+                                <rect key="frame" x="190" y="13" width="49" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="GitHub" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="xgt-0Z-L6y">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="systemSemibold" size="13"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="openGitHubClicked:" target="8lQ-qw-cjs" id="o16-jl-cwb"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Os-6j-ysR">
+                                <rect key="frame" x="64" y="15" width="118" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="Version 1.0 (1)" bezelStyle="rounded" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="qqQ-3j-Lra">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gdb-W4-VEt">
+                                <rect key="frame" x="62" y="35" width="180" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Originally made by xzzz9097" id="Kwy-x9-oqK">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="autoUpdates" destination="7ZS-Ng-wz7" id="rvC-B7-E2w"/>
+                        <outlet property="launchAtLogin" destination="Frx-V6-T4a" id="vU8-aS-KcI"/>
+                        <outlet property="versionLabel" destination="2Os-6j-ysR" id="ubc-0v-CJD"/>
+                    </connections>
+                </viewController>
+                <customObject id="ZhN-8K-Dp0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="If7-w4-dyV" customClass="SUUpdater"/>
+            </objects>
+            <point key="canvasLocation" x="61" y="497"/>
+        </scene>
+    </scenes>
+</document>

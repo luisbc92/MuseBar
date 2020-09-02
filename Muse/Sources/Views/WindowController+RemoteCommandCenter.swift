@@ -123,6 +123,20 @@ extension WindowController {
         nowPlayingInfoCenter.nowPlayingInfo = self.nowPlayingInfo
     }
     
+    @available(OSX 10.13.2, *)
+    func updateMediaItemPropertyArtwork(with image: NSImage) {
+        if image != .defaultBg {
+            let artwork = MPMediaItemArtwork(boundsSize: image.size) { _ -> NSImage in
+                image
+            }
+            self.nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
+        } else {
+            self.nowPlayingInfo[MPMediaItemPropertyArtwork] = nil
+        }
+        
+        nowPlayingInfoCenter.nowPlayingInfo = self.nowPlayingInfo
+    }
+    
     func updatePlaybackState() {
         nowPlayingInfoCenter.playbackState = helper.isPlaying ? .playing : .paused
         updateControlStripButton()

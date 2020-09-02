@@ -2,7 +2,7 @@
 
 An open-source Spotify, Apple Music and Vox system-wide Touch Bar controller.
 
-[Download](https://github.com/planecore/MuseBar/raw/master/Muse%20Bar.zip)
+[Download](https://github.com/planecore/MuseBar/raw/master/Applications/Muse%20Bar.zip)
 
 <img src=Screenshots/Now%20Playing.png>
 

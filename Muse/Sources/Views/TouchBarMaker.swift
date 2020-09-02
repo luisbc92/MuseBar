@@ -27,7 +27,7 @@ import Cocoa
     static let soundSlider                = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.soundSlider")
     static let shuffleRepeatSegmentedView = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.shuffleRepeatSegmentedView")
     static let quitButton = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.quitButton")
-    static let launchAtLoginButton = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.launchAtLoginButton")
+    static let preferencesButton = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).touchBar.preferencesButton")
 }
 
 @available(OSX 10.12.2, *)
@@ -38,6 +38,10 @@ extension WindowController: NSTouchBarDelegate {
      - returns: the main window NSTouchBar
       */
     override func makeTouchBar() -> NSTouchBar? {
+        if PlayersManager.shared.designatedHelperID == .itunes {
+            return popoverBar
+        }
+        
         let touchBar = NSTouchBar()
         
         touchBar.delegate                = self
@@ -65,7 +69,7 @@ extension WindowController: NSTouchBarDelegate {
         touchBar.customizationIdentifier = .popoverBar
         touchBar.defaultItemIdentifiers  = [.shuffleRepeatSegmentedView,
                                             .soundSlider,
-                                            .launchAtLoginButton,
+                                            .preferencesButton,
                                             .quitButton]
         
         return touchBar
@@ -148,10 +152,12 @@ extension WindowController: NSTouchBarDelegate {
                 shuffleRepeatSegmentedView = item.view as? NSSegmentedControl
                 prepareShuffleRepeatSegmentedView()
             }
-        case .launchAtLoginButton:
-            return createItem(identifier: identifier, view: launchAtLoginButton) { item in
-                launchAtLoginButton         = item.view as? NSSegmentedControl
-                prepareLaunchAtLoginButton()
+        case .preferencesButton:
+            return createItem(identifier: identifier, view: preferencesButton) { item in
+                preferencesButton         = item.view as? NSButton
+                preferencesButton?.title  = "Preferences"
+                preferencesButton?.action = #selector(preferencesButtonClicked(_:))
+                preparePreferencesButton()
             }
         case .quitButton:
             return createItem(identifier: identifier, view: quitButton) { item in
@@ -246,14 +252,19 @@ extension WindowController: NSTouchBarDelegate {
                 button.imagePosition = .imageLeading
 //                button.addTouchBarButtonWidthConstraint()
                 customItem.view = button
-            case .likeButton, .quitButton:
+            case .likeButton:
                 let button = NSButton(title: "",
                                       target: self,
                                       action: nil)
                 button.imagePosition = .imageOnly
                 button.addTouchBarButtonWidthConstraint()
                 customItem.view = button
-            case .controlsSegmentedView, .shuffleRepeatSegmentedView, .launchAtLoginButton:
+            case .preferencesButton, .quitButton:
+                let button = NSButton(title: "",
+                                      target: self,
+                                      action: nil)
+                customItem.view = button
+            case .controlsSegmentedView, .shuffleRepeatSegmentedView:
                 customItem.view = NSSegmentedControl()
             default:
                 break
