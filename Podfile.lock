@@ -1,10 +1,16 @@
 PODS:
   - LoginServiceKit (2.2.0)
+  - Sparkle (1.23.0)
   - SpotifyKit (0.0.6)
 
 DEPENDENCIES:
   - LoginServiceKit (from `https://github.com/Clipy/LoginServiceKit.git`)
+  - Sparkle
   - SpotifyKit (from `https://github.com/xzzz9097/SpotifyKit.git`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Sparkle
 
 EXTERNAL SOURCES:
   LoginServiceKit:
@@ -22,8 +28,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   LoginServiceKit: 3c86ce2f2bcd1e373326839d6d863d8a6a5915b4
+  Sparkle: 55b1a87ba69d56913375a281546b7c82dec95bb0
   SpotifyKit: 20abf7e1e170e35683ecbe6d93598e91d4e7b6ab
 
-PODFILE CHECKSUM: d6489e40cf85d22636f2ddbf56baa992e05d66c0
+PODFILE CHECKSUM: 48682bc7eb2c4c989352032f934808a9f07d0af2
 
 COCOAPODS: 1.9.1

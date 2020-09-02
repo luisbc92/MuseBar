@@ -123,13 +123,13 @@ class iTunesHelper: PlayerHelper, LikablePlayerHelper, InternalPlayerHelper, Lik
     
     var playerState: PlayerState {
         // Return current playback status ( R/O )
-        switch application?.playerState {
-        case iTunesEPlSPlaying?:
+        let query = "tell application \"\(iTunesHelper.iTunesName)\"\n get player state as string \nend tell"
+        let state = NSAppleScript(source: query)?.executeAndReturnError(nil).stringValue ?? "stopped"
+        switch state {
+        case "playing":
             return .playing
-        case iTunesEPlSPaused?:
+        case "paused":
             return .paused
-        case iTunesEPlSStopped?:
-            return .stopped
         default:
             // By default return stopped status
             return .stopped

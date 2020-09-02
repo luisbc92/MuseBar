@@ -9,7 +9,6 @@
 import Cocoa
 import Carbon.HIToolbox
 import MediaPlayer
-import LoginServiceKit
 
 @available(OSX 10.12.2, *)
 fileprivate extension NSTouchBarItem.Identifier {
@@ -39,7 +38,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     
     var song                           = Song()
     var nowPlayingInfo: [String : Any] = [:]
-    var autoCloseTimeout: TimeInterval = 1.5
     
     // MARK: Timers
     
@@ -70,7 +68,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     weak var soundPopoverButton:         NSPopoverTouchBarItem?
     weak var soundSlider:                NSSliderTouchBarItem?
     weak var shuffleRepeatSegmentedView: NSSegmentedControl?
-    weak var launchAtLoginButton:        NSSegmentedControl?
+    weak var preferencesButton:          NSButton?
     weak var quitButton:                 NSButton?
     
     // MARK: Vars
@@ -172,13 +170,13 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         }
     }
     
-    @objc func launchAtLoginButtonClicked(_ sender: NSSegmentedControl) {
-        if LoginServiceKit.isExistLoginItems() {
-            LoginServiceKit.removeLoginItems()
-        } else {
-            LoginServiceKit.addLoginItems()
+    @objc func preferencesButtonClicked(_ sender: NSButton) {
+        if !NSApplication.shared.windows.contains(where: { $0.title == "Muse Bar" }) {
+            let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
+            let windowController = storyboard.instantiateController(withIdentifier: "pref-window") as! NSWindowController
+            windowController.window?.level = .floating
+            windowController.showWindow(self)
         }
-        updateLaunchAtLoginButton()
     }
     
     @objc func quitButtonClicked(_ sender: NSButton) {
@@ -371,12 +369,10 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     }
     
     func updateControlStripButton() {
-        if song.isValid && helper.isPlaying {
+        if helper.isPlaying {
             controlStripButton?.attributedTitle = pauseSymbol
-        } else if song.isValid && !helper.isPlaying {
+        } else if !helper.isPlaying {
             controlStripButton?.attributedTitle = playSymbol
-        } else {
-            controlStripButton?.attributedTitle = musicSymbol
         }
     }
     
@@ -514,9 +510,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         
         // Sync shuffling and repeating segmented control
         prepareShuffleRepeatSegmentedView()
-        
-        // Sync Launch at Login status
-        prepareLaunchAtLoginButton()
         
         // Get song details
         prepareSong()
@@ -689,16 +682,9 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         updateShuffleRepeatSegmentedView()
     }
     
-    func prepareLaunchAtLoginButton() {
-        launchAtLoginButton?.target       = self
-        launchAtLoginButton?.segmentCount = 1
-        launchAtLoginButton?.segmentStyle = .separated
-        launchAtLoginButton?.trackingMode = .selectAny
-        launchAtLoginButton?.action       = #selector(launchAtLoginButtonClicked(_:))
-        
-        launchAtLoginButton?.setLabel("Launch at Login", forSegment: 0)
-        
-        updateLaunchAtLoginButton()
+    func preparePreferencesButton() {
+        preferencesButton?.target       = self
+        preferencesButton?.action       = #selector(preferencesButtonClicked(_:))
     }
     
     func prepareQuitButton() {
@@ -964,11 +950,6 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
         }
     }
     
-    func updateLaunchAtLoginButton() {
-        // Update Launch at Login status
-        launchAtLoginButton?.setSelected(LoginServiceKit.isExistLoginItems(), forSegment: 0)
-    }
-    
     func updateShuffleRepeatSegmentedView() {
         // Convenience call for updating the 'repeat' and 'shuffle' buttons
         setShuffleRepeatSegmentedView(shuffleSelected: helper.shuffling,
@@ -1052,6 +1033,9 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
     var image: NSImage = .defaultBg {
         didSet {
             self.updateArtworkColorAndSize(for: image)
+            if #available(OSX 10.13.2, *) {
+                self.updateMediaItemPropertyArtwork(with: image)
+            }
         }
     }
     

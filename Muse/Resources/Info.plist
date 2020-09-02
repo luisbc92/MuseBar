@@ -52,5 +52,7 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/planecore/MuseBar/master/Applications/appcast.xml</string>
 </dict>
 </plist>
