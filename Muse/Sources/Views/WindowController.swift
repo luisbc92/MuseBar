@@ -176,6 +176,7 @@ class WindowController: NSWindowController, NSWindowDelegate, SliderDelegate {
             let windowController = storyboard.instantiateController(withIdentifier: "pref-window") as! NSWindowController
             windowController.window?.level = .floating
             windowController.showWindow(self)
+            NSApplication.shared.activate(ignoringOtherApps: true)
         }
     }
     

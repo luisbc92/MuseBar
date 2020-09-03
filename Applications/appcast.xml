@@ -3,11 +3,11 @@
     <channel>
         <title>Muse Bar</title>
         <item>
-            <title>4.3</title>
-            <pubDate>Wed, 02 Sep 2020 14:58:12 +0300</pubDate>
+            <title>4.3.1</title>
+            <pubDate>Thu, 03 Sep 2020 19:12:48 +0300</pubDate>
             <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
             <sparkle:releaseNotesLink>https://muse-bar-release-notes.matan.workers.dev</sparkle:releaseNotesLink>
-            <enclosure url="https://raw.githubusercontent.com/planecore/MuseBar/master/Applications/Muse%20Bar.zip" sparkle:version="29" sparkle:shortVersionString="4.3" length="6862469" type="application/octet-stream"/>
+            <enclosure url="https://raw.githubusercontent.com/planecore/MuseBar/master/Applications/Muse%20Bar.zip" sparkle:version="30" sparkle:shortVersionString="4.3.1" length="6862636" type="application/octet-stream"/>
         </item>
     </channel>
 </rss>
