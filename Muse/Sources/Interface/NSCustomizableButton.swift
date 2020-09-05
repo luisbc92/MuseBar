@@ -8,36 +8,7 @@
 
 import Cocoa
 
-class NSCustomizableButton: NSButton, NSMouseHoverableView {
-    
-    // MARK: Hovering
-    
-    private var mouseTrackingArea: NSTrackingArea!
-    
-    var onMouseHoverStateChange: ((NSViewMouseHoverState) -> ())?
-    
-    override func mouseEntered(with event: NSEvent) {
-        onMouseHoverStateChange?(.entered)
-    }
-    
-    override func mouseExited(with event: NSEvent) {
-        onMouseHoverStateChange?(.exited)
-    }
-    
-    override func updateTrackingAreas() {
-        if let area = mouseTrackingArea {
-            removeTrackingArea(area)
-        }
-        
-        mouseTrackingArea = NSTrackingArea.init(rect: self.bounds,
-                                                options: .defaultMouse,
-                                                owner: self,
-                                                userInfo: nil)
-        
-        self.addTrackingArea(mouseTrackingArea)
-    }
-    
-    // MARK: Customization
+class NSCustomizableButton: NSButton {
     
     var customizableCell: ButtonCell? {
         return self.cell as? ButtonCell
