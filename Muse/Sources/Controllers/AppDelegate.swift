@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Sparkle
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -107,21 +108,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Functions
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        if !isRunningFromApplicationsFolder() {
+        if Bundle.main.isInstalled {
+            if let updater = SUUpdater.shared() {
+                if updater.automaticallyChecksForUpdates {
+                    updater.checkForUpdatesInBackground()
+                }
+            }
+        } else {
             quitOtherMuseBarInstanceIfNeeded()
         }
         AppMover.moveIfNecessary()
         // Enable TouchBar overlay if 10.12.2
         if #available(OSX 10.12.2, *) {
             NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
-        }
-    }
-    
-    func isRunningFromApplicationsFolder() -> Bool {
-        if let path = NSWorkspace.shared.fullPath(forApplication: "Muse Bar") {
-            return Bundle.main.bundleURL == URL(fileURLWithPath: path)
-        } else {
-            return false
         }
     }
     
